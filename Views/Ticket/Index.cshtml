@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using (Html.BeginForm("ArmarTicket", "Ticket", FormMethod.Post))
+{
+    @Html.DropDownList("Categoria", (SelectList)ViewBag.ListaPrio, "Seleccione Tipo de Problema", new { @class = "form-control" })
+    <h1>Ingrese descripción del problema</h1>
+    <input type="text" name="descripcion" />
+    <input type="hidden" name="prioridad" id="prioridad" />
+    <button type="submit">Buscar</button>
+}
+
+@section Scripts {
+    <script>
+        // Este script se ejecutará cuando se cambie la selección en el DropDownList
+        $(document).ready(function () {
+            $('#Categoria').change(function () {
+                // Obtener el valor seleccionado del DropDownList
+                var valorSeleccionado = $(this).val();
+                // Establecer el valor seleccionado en el campo oculto
+                console.log(valorSeleccionado);
+                $('#prioridad').val(valorSeleccionado);
+            });
+        });
+    </script>
+}
+
