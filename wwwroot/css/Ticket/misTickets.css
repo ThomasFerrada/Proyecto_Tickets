@@ -1,0 +1,74 @@
+﻿body {
+    font-family: Bahnschrift;
+    background-color: rgb(20, 80, 20); /* Fondo del cuerpo de la página */
+    margin: 0;
+    padding: 0px;
+}
+
+.container {
+    width: 95%; /* Utiliza el 90% del ancho de la pantalla */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    margin: 20px auto; /* Centra el contenedor horizontalmente */
+    background: #fff; /* Fondo blanco del contenedor */
+    padding: 10px; /* Espaciado interno del contenedor */
+    font-family: Bahnschrift;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra alrededor del contenedor */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* Espaciado inferior del título */
+}
+
+table {
+    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
+    border-collapse: collapse;
+    margin: 20px 0; /* Espaciado superior e inferior de la tabla */
+    font-family: Bahnschrift;
+    font-size: 16px; /* Tamaño de fuente para la tabla */
+    table-layout: fixed; /* Colapsa el ancho de las celdas */
+}
+
+    table th, table td {
+        padding: 12px 15px; /* Espaciado interno de las celdas */
+        text-align: left; /* Alineación del texto a la izquierda */
+        border-bottom: 1px solid #ddd; /* Borde inferior de las celdas */
+        word-wrap: break-word; /* Ajusta el contenido en caso de texto largo */
+        border-right: 1px solid #ddd; /* Línea divisoria entre columnas */
+    }
+
+    table th {
+        background-color: #4CAF50; /* Fondo de los encabezados de columna */
+        color: white; /* Color del texto de los encabezados */
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2; /* Fondo alternativo para las filas pares */
+    }
+
+    table tr:hover {
+        background-color: #ddd; /* Fondo cuando el ratón pasa sobre las filas */
+    }
+    table th:last-child, table td:last-child {
+        border-right: none; /* Eliminar línea divisoria en la última columna */
+    }
+.btn {
+    display: inline-block;
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-family: Bahnschrift;
+    font-size: 16px; /* Tamaño de fuente del botón */
+    color: #fff; /* Color del texto del botón */
+    background-color: #4CAF50; /* Fondo del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center;
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+    text-decoration: none; /* Sin subrayado */
+    margin-top: 20px; /* Espaciado superior del botón */
+}
+
+    .btn:hover {
+        background-color: #45a049; /* Fondo del botón al pasar el ratón */
+    }
