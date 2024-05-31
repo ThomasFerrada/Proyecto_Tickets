@@ -2,16 +2,57 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = null;
 }
+<link rel="stylesheet" href="~/css/Ticket/Index.css" asp-append-version="true" />
+<div class="principal">
+    <div class="label1">
+        <h2>Crear consulta técnica</h2>
 
-@using (Html.BeginForm("ArmarTicket", "Ticket", FormMethod.Post))
-{
-    @Html.DropDownList("Categoria", (SelectList)ViewBag.ListaPrio, "Seleccione Tipo de Problema", new { @class = "form-control" })
-    <h1>Ingrese descripción del problema</h1>
-    <input type="text" name="descripcion" />
-    <input type="hidden" name="prioridad" id="prioridad" />
-    <button type="submit">Buscar</button>
-}
+    </div>
+
+
+    <div class="formulario">
+        @using (Html.BeginForm("ArmarTicket", "Ticket", FormMethod.Post, new { @class="full-width-form"}))
+        {
+            <div class="fila">
+                <div class="textoformulario">
+                    <h3>Seleccione categoría del problema</h3>
+                </div>
+                @Html.DropDownList("Categoria", (SelectList)ViewBag.ListaPrio, "Problema", new { @class = "form-control" })
+            </div>
+            <div class="fila">
+                <div class="textoformulario">
+                    <h3>Ingrese descripción del problema</h3>
+                </div>
+                <textarea id="descripcion" type="text" name="descripcion" placeholder="Descripción (máx. 255 carácteres)"></textarea>
+            </div>
+            <input type="hidden" name="prioridad" id="prioridad" />
+            <div class="button-container">
+                <button id="botoncrear" type="submit">Crear</button>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @section Scripts {
     <script>
