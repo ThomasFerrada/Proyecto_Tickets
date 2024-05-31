@@ -27,6 +27,7 @@ namespace Proyecto_Tickets.Controllers
 
         public IActionResult Examinar(int idTicketExaminar)
         {
+            //traer ticket
             Ticket ticket= new Ticket();
             ticket = _tickets.ObtenerTicket(idTicketExaminar);
             return View(ticket);
