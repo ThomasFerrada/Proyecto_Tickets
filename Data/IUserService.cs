@@ -4,7 +4,7 @@ namespace Proyecto_Tickets.Data
 {
     public interface IUserService
     {
-        Cliente ValidateCliente(string username, string password);
+        Usuario ValidateUsuario(string username, string password);
         Cliente GetClienteById(int id);
     }
 }

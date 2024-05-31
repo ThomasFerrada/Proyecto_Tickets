@@ -6,6 +6,7 @@ namespace Proyecto_Tickets.Data
     {
         Ticket ObtenerTicket(int id);
         List<Ticket> ObtenerTickets(int id);
+        List<Ticket> ObtenerTicketsTecnico(int id);
         string InsertTicket(Ticket ticket);
 
         List<int> Data();
