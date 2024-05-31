@@ -1,27 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control de Tickets</title>
+    <link rel="stylesheet" href="~/css/Ticket/misTickets.css"> <!-- Asegúrate de que la ruta sea correcta -->
+    <style>
+        .container {
+            /* Estilos del contenedor */
+            text-align: center; /* Centrar contenido */
+        }
 
-@model List<Ticket>
+        .center-button {
+            display: inline-block; /* Convertir a bloque para centrar aassdasd*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Panel de Control de Tickets</h1>
+        <table>
+            <tr>
+                <th>Ticket</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+                <th>Tecnico</th>
+                <!-- Añade más columnas según los atributos de tu clase Ticket -->
+            </tr>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.idTicket</td>
+                    <td>@ticket.Descripcion</td>
+                    <td>@ticket.Estado</td>
+                    <td>@ticket.Tecnico</td>
+                    <!-- Añade más celdas según los atributos de tu clase Ticket -->
+                </tr>
+            }
+        </table>
+        <div class="center-button">
+            <!-- Div para centrar el botón -->
+            <button onclick="redirigir()">Cerrar Sesión</button> <!-- Agregar botón "Salir" con función de redirección -->
+        </div>
+    </div>
 
-<table>
-    <tr>
-        <th>Ticket</th>
-        <th>Descripcion</th>
-        <th>Estado</th>
-        <th>Tecnico</th>
-        <!-- Añade más columnas según los atributos de tu clase Ticket -->
-    </tr>
-    @foreach (var ticket in Model)
-    {
-        <tr>
-            <td>@ticket.idTicket</td>
-            <td>@ticket.Descripcion</td>
-            <td>@ticket.EstadoCliente</td>
-            <td>@ticket.Tecnico</td>
-            <!-- Añade más celdas según los atributos de tu clase Ticket -->
-        </tr>
-    }
-</table>
+    <!-- Script para la función de redirección -->
+    <script>
+        function redirigir() {
+            // Redirigir al usuario a otra página
+            window.location.href = "http://localhost:5000/Inicio/Index.html"; // Cambia "otra_pagina.html" por la URL deseada
+        }
+    </script>
+</body>
+</html>
