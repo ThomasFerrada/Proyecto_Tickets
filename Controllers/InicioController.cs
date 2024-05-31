@@ -23,14 +23,27 @@ namespace Proyecto_Tickets.Controllers
         [HttpPost]
         public ActionResult Index(string correo, string pwd)
         {
-            var cliente=_userService.ValidateCliente(correo, pwd);
+            var usuario=_userService.ValidateUsuario(correo, pwd);
             
-            if (cliente != null)
+            if (usuario != null)
             {
-                HttpContext.Session.SetInt32("UserId", cliente.IdCliente);
+                HttpContext.Session.SetInt32("UserId", usuario.Id);
+                HttpContext.Session.SetInt32("TipoUsuario", usuario.TipoUsuario);
+                if (usuario.TipoUsuario==1)
+                {
+                    return RedirectToAction("Index", "Ticket");
+                }
+                else if(usuario.TipoUsuario == 2)
+                {
+                    return RedirectToAction("Index", "TicketTecnico");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Ticket");
+                }
 
                 // Redirige a la vista de inicio o a otra vista
-                return RedirectToAction("Index", "Ticket");
+                
             }
             else
             {

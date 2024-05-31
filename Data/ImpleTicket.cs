@@ -121,5 +121,22 @@ namespace Proyecto_Tickets.Data
 
             return tickets;
         }
+
+        public List<Ticket> ObtenerTicketsTecnico(int id)
+        {
+            List<Ticket> tickets = new List<Ticket>();
+
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                parametros.Add("@IdTecnico", id);
+
+                string sql = "SELECT * FROM Ticket WHERE idTecnico = @IdTecnico";
+
+                tickets = conexion.Query<Ticket>(sql,parametros).ToList();
+
+            }
+            return tickets;
+        }
     }
 }

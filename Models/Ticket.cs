@@ -9,6 +9,7 @@
         public int IdTecnico { get; set; }
         public int IdPrioridad { get; set; }
         public string Bloqueado { get; set; }
+        public string EstadoCliente { get; set; }
         public string? Tecnico { get; set; }
 
         

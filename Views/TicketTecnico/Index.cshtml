@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    
+}
+
+
+@model List<Ticket>
+@{
+    bool existePrioridad = Model.Any(t => t.IdPrioridad == 5);
+}
+
+<table>
+    <tr>
+        <th>Ticket</th>
+        <th>Descripcion</th>
+        <th>Estado</th>
+        <th>Prioridad</th>
+        <th>Bloquedo</th>
+        <th>Examinar</th>
+        <th>Empezar</th>
+        <!-- Añade más columnas según los atributos de tu clase Ticket -->
+    </tr>
+    @foreach (var ticket in Model)
+    {
+        <tr>
+            <td>@ticket.idTicket</td>
+            <td>@ticket.Descripcion</td>
+            <td>@ticket.Estado</td>
+            @if (ticket.IdPrioridad<3)
+            {
+                <td>Baja</td>
+            }
+            else if (ticket.IdPrioridad < 5 && ticket.IdPrioridad>2)
+            {
+                <td>Media</td>
+            }
+            else
+            {
+                <td>Alta</td>
+            }
+            <td>@ticket.Bloqueado</td>
+            <td>
+                @if (existePrioridad)
+                {
+                    
+                }
+                <form asp-action="Examinar" method="post" target="_blank">
+                    <input type="hidden" name="idTicketExaminar" value="@ticket.idTicket" />
+                    <button type="submit">Examinar</button>
+                </form>
+            </td>
+            <td>
+                <form asp-action="Empezar" method="post" target="_blank">
+                    <input type="hidden" name="idTicketEmpezar" value="@ticket.idTicket" />
+                    <button type="submit">Empezar</button>
+                </form>
+            </td>
+            <!-- Añade más celdas según los atributos de tu clase Ticket -->
+        </tr>
+    }
+</table>
