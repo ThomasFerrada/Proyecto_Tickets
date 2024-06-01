@@ -30,15 +30,15 @@
             <td class="@{
                 if (ticket.IdPrioridad < 3)
                 {
-                        @:baja
+                            @:baja
                 }
                 else if (ticket.IdPrioridad < 5 && ticket.IdPrioridad > 2)
                 {
-                        @:media
+                            @:media
                 }
                 else
                 {
-                        @:alta
+                            @:alta
                 }
             }">
                 @if (ticket.IdPrioridad < 3)
@@ -96,6 +96,6 @@
 <script>
     function redirigir() {
         // Redirigir al usuario a otra página
-        window.location.href = "http://localhost:5000/Inicio/Index.html"; // Cambia "otra_pagina.html" por la URL deseada
+        window.location.href = "http://localhost:5000/Inicio/Index"; // Cambia "otra_pagina.html" por la URL deseada
     }
 </script>
