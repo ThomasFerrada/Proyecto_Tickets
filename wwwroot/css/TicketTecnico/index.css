@@ -1,0 +1,15 @@
+﻿body {
+}
+
+.btnimg{
+    border:none;
+}
+.imgbtn {
+    width: 15px;
+    height: 15px;
+}
+
+.imgbtn:hover {
+    width: 18px;
+    height: 18px;
+}
