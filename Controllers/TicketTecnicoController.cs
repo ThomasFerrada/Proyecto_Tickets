@@ -19,6 +19,22 @@ namespace Proyecto_Tickets.Controllers
             var tipoUsr=  HttpContext.Session.GetInt32("TipoUsuario");
             List<Ticket>ticketList = new List<Ticket>();
             ticketList = _tickets.ObtenerTicketsTecnico(id);
+            bool bloquear = ticketList.Any(t => t.IdPrioridad == 5);
+            foreach (var ticket in ticketList)
+            {
+                if (ticket.IdPrioridad > 4)
+                {
+                    bloquear = true;
+                    ticket.Bloqueado = "N";
+                }
+                else if (ticket.IdPrioridad<5 && bloquear==true)
+                {
+                    ticket.Bloqueado = "S";
+                }
+                else {
+                    ticket.Bloqueado="N";
+                }
+            }
 
             return View(ticketList);
         }

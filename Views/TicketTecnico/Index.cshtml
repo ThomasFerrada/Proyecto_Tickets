@@ -4,20 +4,19 @@
 @{
     
 }
+<link rel="stylesheet" href="~/css/TicketTecnico/index.css" asp-append-version="true" />
 
 
 @model List<Ticket>
 @{
-    bool existePrioridad = Model.Any(t => t.IdPrioridad == 5);
+    
 }
 
 <table>
     <tr>
         <th>Ticket</th>
-        <th>Descripcion</th>
         <th>Estado</th>
-        <th>Prioridad</th>
-        <th>Bloquedo</th>
+        <th>Prioridad</th>   
         <th>Examinar</th>
         <th>Empezar</th>
         <!-- Añade más columnas según los atributos de tu clase Ticket -->
@@ -26,7 +25,6 @@
     {
         <tr>
             <td>@ticket.idTicket</td>
-            <td>@ticket.Descripcion</td>
             <td>@ticket.Estado</td>
             @if (ticket.IdPrioridad<3)
             {
@@ -40,22 +38,35 @@
             {
                 <td>Alta</td>
             }
-            <td>@ticket.Bloqueado</td>
-            <td>
-                @if (existePrioridad)
-                {
-                    
-                }
-                <form asp-action="Examinar" method="post" target="_blank">
-                    <input type="hidden" name="idTicketExaminar" value="@ticket.idTicket" />
-                    <button type="submit">Examinar</button>
-                </form>
+            <td> 
+                    <form asp-action="Examinar" method="post" target="_blank">
+                        <input type="hidden" name="idTicketExaminar" value="@ticket.idTicket" />
+                    <button class="btnimg" type="submit">
+                        <img class="imgbtn" src="/img/lupa.png" />
+                        </button>
+                    </form>
+                
             </td>
             <td>
-                <form asp-action="Empezar" method="post" target="_blank">
-                    <input type="hidden" name="idTicketEmpezar" value="@ticket.idTicket" />
-                    <button type="submit">Empezar</button>
-                </form>
+                @if (ticket.Bloqueado == "S")
+                {
+                    <form asp-action="Empezar" method="post" target="_blank">
+                        <input type="hidden" name="idTicketEmpezar" value="@ticket.idTicket" />
+                        <button class="btnimg"  type="submit" disabled>
+                            <img  src="~/img/boton-de-play.png" alt="Examinar" style="width: 15px; height: 15px; opacity: 0.7;" />
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="Empezar" method="post" target="_blank">
+                        <input type="hidden" name="idTicketEmpezar" value="@ticket.idTicket" />
+                        <button class="btnimg" type="submit">
+                            <img class="imgbtn"  src="~/img/boton-de-play.png" alt="Examinar" />
+                        </button>
+                    </form>
+                }
+                
             </td>
             <!-- Añade más celdas según los atributos de tu clase Ticket -->
         </tr>
