@@ -4,8 +4,16 @@
 @{
 }
 
+<link rel="stylesheet" href="~/css/TicketTecnico/examinar.css" asp-append-version="true" />
+
 @model Ticket
 
+<div class="background">
+    <div class="ticket-container">
+        <div class="title">Información del Ticket</div>
+        <div class="ticket-info">
+            <div class="info-label">id Ticket:</div>
+            <div class="info-value">@Model.idTicket</div>
 
 <h1>Ticket: @Model.IdTicket</h1>
 <h1>Estado: @Model.EstTec</h1>
@@ -15,3 +23,8 @@
     Descripcion:<textarea> @Model.Descripcion </textarea>
 </h1>
 
+            <div class="info-label">Descripción:</div>
+            <div class="info-value"><textarea readonly>@Model.Descripcion</textarea></div>
+        </div>
+    </div>
+</div>
