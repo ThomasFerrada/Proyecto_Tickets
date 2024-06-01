@@ -1,6 +1,7 @@
 ﻿body {
     font-family: Bahnschrift;
     background-color: rgb(20, 80, 20); /* Fondo del cuerpo de la página */
+    background-image: url('../../img/smooth-green-concrete-wall-background.jpg');
     margin: 0;
     padding: 0px;
 }

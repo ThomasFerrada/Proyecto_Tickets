@@ -2,21 +2,22 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    
+
 }
 <link rel="stylesheet" href="~/css/TicketTecnico/index.css" asp-append-version="true" />
 
-
 @model List<Ticket>
 @{
-    
+
 }
+
+<h1>Tickets Asignados</h1>
 
 <table>
     <tr>
-        <th>Ticket</th>
+        <th>Id Ticket</th>
         <th>Estado</th>
-        <th>Prioridad</th>   
+        <th>Prioridad</th>
         <th>Examinar</th>
         <th>Empezar</th>
         <!-- Añade más columnas según los atributos de tu clase Ticket -->
@@ -24,8 +25,8 @@
     @foreach (var ticket in Model)
     {
         <tr>
-            <td>@ticket.idTicket</td>
-            <td>@ticket.Estado</td>
+            <td>@ticket.IdTicket</td>
+            <td>@ticket.EstTec</td>
             @if (ticket.IdPrioridad<3)
             {
                 <td>Baja</td>
@@ -40,18 +41,17 @@
             }
             <td> 
                     <form asp-action="Examinar" method="post" target="_blank">
-                        <input type="hidden" name="idTicketExaminar" value="@ticket.idTicket" />
+                        <input type="hidden" name="idTicketExaminar" value="@ticket.IdTicket" />
                     <button class="btnimg" type="submit">
                         <img class="imgbtn" src="/img/lupa.png" />
-                        </button>
-                    </form>
-                
+                    </button>
+                </form>
             </td>
             <td>
                 @if (ticket.Bloqueado == "S")
                 {
                     <form asp-action="Empezar" method="post" target="_blank">
-                        <input type="hidden" name="idTicketEmpezar" value="@ticket.idTicket" />
+                        <input type="hidden" name="idTicketEmpezar" value="@ticket.IdTicket" />
                         <button class="btnimg"  type="submit" disabled>
                             <img  src="~/img/boton-de-play.png" alt="Examinar" style="width: 15px; height: 15px; opacity: 0.7;" />
                         </button>
@@ -60,15 +60,27 @@
                 else
                 {
                     <form asp-action="Empezar" method="post" target="_blank">
-                        <input type="hidden" name="idTicketEmpezar" value="@ticket.idTicket" />
+                        <input type="hidden" name="idTicketEmpezar" value="@ticket.IdTicket" />
                         <button class="btnimg" type="submit">
-                            <img class="imgbtn"  src="~/img/boton-de-play.png" alt="Examinar" />
+                            <img class="imgbtn" src="~/img/boton-de-play.png" alt="Examinar" />
                         </button>
                     </form>
                 }
-                
             </td>
             <!-- Añade más celdas según los atributos de tu clase Ticket -->
         </tr>
     }
 </table>
+<div class="center-button">
+    <!-- Div para centrar el botón -->
+    <button onclick="redirigir()">Cerrar Sesión</button> <!-- Agregar botón "Salir" con función de redirección -->
+</div>
+    </div>
+
+<!-- Script para la función de redirección -->
+<script>
+    function redirigir() {
+        // Redirigir al usuario a otra página
+        window.location.href = "http://localhost:5000/Inicio/Index"; // Cambia "otra_pagina.html" por la URL deseada
+    }
+</script>

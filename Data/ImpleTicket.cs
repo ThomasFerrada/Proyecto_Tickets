@@ -24,7 +24,7 @@ namespace Proyecto_Tickets.Data
                 list.Add(tecnico.IdTecnico);
                 sql = "SELECT TOP 1 * FROM Ticket ORDER BY idTicket DESC"; // Suponiendo que el identificador único se llama ID
                 ticket = conexion.QueryFirstOrDefault<Ticket>(sql);
-                list.Add(ticket.idTicket+1);
+                list.Add(ticket.IdTicket+1);
 
             }
             return list;
@@ -64,15 +64,16 @@ namespace Proyecto_Tickets.Data
             {
 
                 var parametros = new DynamicParameters();
-                parametros.Add("@idTicket", ticket.idTicket);
+                parametros.Add("@idTicket", ticket.IdTicket);
                 parametros.Add("@descripcion", ticket.Descripcion);
-                parametros.Add("@estado", ticket.Estado);
                 parametros.Add("@idCliente", ticket.IdCliente);
                 parametros.Add("@idTecnico", ticket.IdTecnico);
                 parametros.Add("@idPrioridad", ticket.IdPrioridad);
                 parametros.Add("@bloqueado", ticket.Bloqueado);
-                string sql = "INSERT INTO Ticket (idTicket, descripcion, estado, idCliente, idTecnico, idPrioridad, bloqueado) " +
-                             "VALUES (@idTicket, @descripcion, @estado, @idCliente, @idTecnico, @idPrioridad, @bloqueado)";
+                parametros.Add("@EstadoCliente", ticket.EstadoCliente);
+                parametros.Add("@EstadoTecnico", ticket.EstadoTecnico);
+                string sql = "INSERT INTO Ticket (idTicket, descripcion, idCliente, idTecnico, idPrioridad, bloqueado, estadoCliente, estadoTecnico) " +
+                             "VALUES (@idTicket, @descripcion, @idCliente, @idTecnico, @idPrioridad, @bloqueado, @EstadoCliente,@EstadoTecnico)";
                 var response = conexion.Execute(sql, parametros);
 
                 var parametros2 = new DynamicParameters();
@@ -137,6 +138,59 @@ namespace Proyecto_Tickets.Data
 
             }
             return tickets;
+        }
+
+        public List<EstadoCliente> ObetnerEstCiente()
+        {
+            List<EstadoCliente> listaCliente = new List<EstadoCliente>();
+
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                string sql = "SELECT * FROM EstadoCliente";
+                listaCliente = conexion.Query<EstadoCliente>(sql).ToList();
+            }
+            return listaCliente;
+        }
+
+        public List<EstadoTecnico> ObetnerEstTecnico()
+        {
+            List<EstadoTecnico> listaTecnico = new List<EstadoTecnico>();
+
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                string sql = "SELECT * FROM EstadoTecnico";
+                listaTecnico = conexion.Query<EstadoTecnico>(sql).ToList();
+            }
+            return listaTecnico;
+        }
+
+        public string UpdateTicket(int NuevoEstado, string comentario, int ticket)
+        {
+
+            
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                parametros.Add("@NuevoEstado", NuevoEstado);
+                parametros.Add("@Comentario", comentario);
+                parametros.Add("@IdTicket", ticket);
+
+                string sql = "UPDATE Ticket SET estadoTecnico = @NuevoEstado, ComentarioTec = @Comentario";
+
+                // Si el NuevoEstado no es igual a 3, también actualizamos el EstadoClie
+                if (NuevoEstado != 3)
+                {
+                    sql += ", estadoCliente = @NuevoEstado";
+                }
+
+                sql += " WHERE idTicket = @IdTicket";
+
+                // Ejecutamos el UPDATE
+                var response= conexion.Execute(sql, parametros);
+                return response.ToString();
+            }
+            
+
         }
     }
 }

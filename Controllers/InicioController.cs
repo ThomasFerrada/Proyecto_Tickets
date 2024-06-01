@@ -31,7 +31,7 @@ namespace Proyecto_Tickets.Controllers
                 HttpContext.Session.SetInt32("TipoUsuario", usuario.TipoUsuario);
                 if (usuario.TipoUsuario==1)
                 {
-                    return RedirectToAction("Index", "Ticket");
+                    return RedirectToAction("misTickets", "Ticket");
                 }
                 else if(usuario.TipoUsuario == 2)
                 {
