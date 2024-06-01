@@ -22,7 +22,7 @@
         <table>
             <tr>
                 <th>Ticket</th>
-                <th>Descripcion</th>
+                <th>Problema</th>
                 <th>Estado</th>
                 <th>Tecnico</th>
                 <!-- Añade más columnas según los atributos de tu clase Ticket -->
@@ -30,9 +30,9 @@
             @foreach (var ticket in Model)
             {
                 <tr>
-                    <td>@ticket.idTicket</td>
-                    <td>@ticket.Descripcion</td>
-                    <td>@ticket.Estado</td>
+                    <td>@ticket.IdTicket</td>
+                    <td>@ticket.Problema</td>
+                    <td>@ticket.EstCli</td>
                     <td>@ticket.Tecnico</td>
                     <!-- Añade más celdas según los atributos de tu clase Ticket -->
                 </tr>
@@ -48,7 +48,7 @@
     <script>
         function redirigir() {
             // Redirigir al usuario a otra página
-            window.location.href = "http://localhost:5000/Inicio/Index.html"; // Cambia "otra_pagina.html" por la URL deseada
+            window.location.href = "http://localhost:5000/Inicio/Index"; // Cambia "otra_pagina.html" por la URL deseada
         }
     </script>
 </body>
