@@ -9,28 +9,42 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/TicketTecnico/Empezar.css" asp-append-version="true" />
+<div class="principal">
+    <div class="label1">
+        <h2>Información del Ticket</h2>
+    </div>
+    @using (Html.BeginForm("ActualizarEstadoTicket", "TicketTecnico", FormMethod.Post, new { @class = "full-width-form" }))
+    {
+        
+        <input id="valor" type="hidden" value="@Model.EstadoTecnico" />
+        <div class="formulario">
+            <div class="fila">
+                <div class="textoformulario">
+                    <h3>Cambiar estado del ticket</h3>
+                </div>
+                @Html.DropDownList("Estado", (SelectList)ViewBag.ListaPrio, new { @class = "form-control" })
+            </div>
+            <div class="fila">
+                <div class="textoformulario">
+                    <h3>Ingresar comentario</h3>
+                </div>
+                <textarea id="descripcion" type="text" name="comentario" placeholder="Descripción (máx. 255 carácteres)"></textarea>
+            </div>
+            <input type="hidden" name="NuevoEstado" id="NuevoEstado" />
+            <input type="hidden" name="ticket" value="@Model.IdTicket" />
+            <div class="button-container">
+                <button id="botoncrear" type="submit">Modificar</button>
+            </div>
+            <div class="button-container">
+                <button id="botonvolver" type="submit">Volver</button>
+            </div>
+            
+        </div>
 
-@using (Html.BeginForm("ActualizarEstadoTicket", "TicketTecnico", FormMethod.Post, new { @class = "full-width-form" }))
-{
-    <input id="valor" type="hidden" value="@Model.EstadoTecnico" />
-    <div class="fila">
-        <div class="textoformulario">
-            <h3>Seleccione categoría del problema</h3>
-        </div>
-        @Html.DropDownList("Estado", (SelectList)ViewBag.ListaPrio, new { @class = "form-control" })
-    </div>
-    <div class="fila">
-        <div class="textoformulario">
-            <h3>Ingrese descripción del problema</h3>
-        </div>
-        <textarea id="descripcion" type="text" name="comentario" placeholder="Descripción (máx. 255 carácteres)"></textarea>
-    </div>
-    <input type="hidden" name="NuevoEstado" id="NuevoEstado" />
-    <input type="hidden" name="ticket" value="@Model.IdTicket" />
-    <div class="button-container">
-        <button id="botoncrear" type="submit">Crear</button>
-    </div>
-}
+    }
+</div>
+
 
 
 
