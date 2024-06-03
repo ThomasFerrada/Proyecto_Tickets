@@ -27,19 +27,20 @@
             </div>
             <div class="fila">
                 <div class="textoformulario">
-                    <h3>Ingresar comentario</h3>
+                    <h3>Descripción del problema</h3>
                 </div>
                 <textarea id="descripcion" type="text" name="comentario" placeholder="Descripción (máx. 255 carácteres)"></textarea>
             </div>
             <input type="hidden" name="NuevoEstado" id="NuevoEstado" />
             <input type="hidden" name="ticket" value="@Model.IdTicket" />
-            <div class="button-container">
-                <button id="botoncrear" type="submit">Modificar</button>
+            <div class="fila1">
+                <div class="button-container">
+                    <button id="botonvolver" type="submit">Volver</button>
+                </div>
+                <div class="button-container">
+                    <button id="botoncrear" type="submit">Modificar</button>
+                </div>
             </div>
-            <div class="button-container">
-                <button id="botonvolver" type="submit">Volver</button>
-            </div>
-            
         </div>
 
     }
