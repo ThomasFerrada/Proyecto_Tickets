@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Http;
 using Proyecto_Tickets.Data;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Proyecto_Tickets.Controllers
 {
@@ -37,7 +38,12 @@ namespace Proyecto_Tickets.Controllers
                 {
                     return RedirectToAction("Index", "TicketTecnico");
                 }
+                else if (usuario.TipoUsuario == 3)
+                {
+                    return RedirectToAction("Index", "Administrador");
+                }
                 else
+                
                 {
                     return RedirectToAction("Index", "Ticket");
                 }
