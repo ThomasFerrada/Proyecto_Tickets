@@ -13,7 +13,26 @@
 <div class="principal">
     <div class="label1">
         <h2>Información del Ticket</h2>
+    
+    @if (Model.IdPrioridad>4)
+    {
+       <div>
+           <button id="solitud"> Solicitud de cambio</button>
+        </div>
+    }
+
+    <div id="motivo" style="display:none">
+        <h3>Motivo de la solicitud</h3>
+            <form asp-action="Peticion" method="post" target="_blank">
+                <input type="hidden" name="idTicket" value="@Model.IdTicket" />
+                <textarea name="motivo"></textarea>
+                <button class="btnimg" type="submit">
+                    Ingresar
+                </button>
+            </form>
     </div>
+    
+        
     @using (Html.BeginForm("ActualizarEstadoTicket", "TicketTecnico", FormMethod.Post, new { @class = "full-width-form" }))
     {
         
@@ -60,4 +79,14 @@
             $('#NuevoEstado').val(valorSeleccionado);
         });
     });
+
+        document.getElementById("solitud").addEventListener("click", function () {
+            var miDiv = document.getElementById("motivo");
+            if (miDiv.style.display === "none" || miDiv.style.display === "") {
+                miDiv.style.display = "flex";
+            } else {
+                miDiv.style.display = "none";
+            }
+        });
+
 </script>

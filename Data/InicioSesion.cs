@@ -50,7 +50,7 @@ namespace Proyecto_Tickets.Data
 
                     if (response2==null)
                     {
-                        sql = "SELECT * FROM Tecnico WHERE correo = @Correo AND contrasena = @Contraseña";
+                        sql = "SELECT * FROM Administrador WHERE correo = @Correo AND contrasena = @Contraseña";
                         var response3 = conexion.QuerySingleOrDefault<Administrador>(sql, parametros);
                         if (response3==null)
                         {
