@@ -1,0 +1,158 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Proyecto_Tickets.Data;
+using Proyecto_Tickets.Models;
+using System.Collections.Generic;
+using System.Net.Sockets;
+
+namespace Proyecto_Tickets.Controllers
+{
+    public class TicketTecnicoController : Controller
+    {
+        private readonly ITickets _tickets;
+
+        public TicketTecnicoController(ITickets tickets)
+        {
+
+            _tickets = tickets;
+        }
+        public IActionResult Index()
+        {
+            var id = HttpContext.Session.GetInt32("UserId") ?? 0;
+            var tipoUsr=  HttpContext.Session.GetInt32("TipoUsuario");
+            if (id!=0 && tipoUsr==2)
+            {
+                List<Ticket> ticketList = new List<Ticket>();
+                List<EstadoTecnico> estado = new List<EstadoTecnico>();
+                List<Prioridad> prob = new List<Prioridad>();
+                prob = _tickets.ObtenerPrio();
+                estado = _tickets.ObetnerEstTecnico();
+                ticketList = _tickets.ObtenerTicketsTecnico(id);
+                bool bloquear = ticketList.Any(t => t.IdPrioridad == 5);
+                foreach (var ticket in ticketList)
+                {
+                    if (ticket.IdPrioridad > 4)
+                    {
+                        bloquear = true;
+                        ticket.Bloqueado = "N";
+                    }
+                    else if (ticket.IdPrioridad < 5 && bloquear == true)
+                    {
+                        ticket.Bloqueado = "S";
+                    }
+                    else
+                    {
+                        ticket.Bloqueado = "N";
+                    }
+                    var idestado = ticket.EstadoTecnico;
+                    var estadoTec = estado
+                        .Where(estadoTec => estadoTec.IdEstado == idestado) // Filtra los problemas cuyo Id coincide con el IdProblema del ticket
+                        .Select(estadoTec => estadoTec.Estado) // Proyecta el string asociado al problema encontrado
+                        .FirstOrDefault();
+
+                    ticket.EstTec = estadoTec;
+                }
+
+                return View(ticketList);
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Inicio");
+            }
+
+            
+        }
+
+        [HttpPost]
+
+        public IActionResult Examinar(int idTicketExaminar)
+        {
+            var id = HttpContext.Session.GetInt32("UserId") ?? 0;
+            var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            if (id != 0 && tipoUsr == 2)
+            {
+                
+                Ticket ticket = new Ticket();
+                ticket = _tickets.ObtenerTicket(idTicketExaminar);
+                return View(ticket);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Inicio");
+            }
+                
+        }
+
+        public IActionResult Empezar(int idTicketEmpezar)
+        {
+            var id = HttpContext.Session.GetInt32("UserId") ?? 0;
+            var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            if (id != 0 && tipoUsr == 2)
+            {
+                List<EstadoTecnico> estado = new List<EstadoTecnico>();
+                estado = _tickets.ObetnerEstTecnico();
+                Ticket ticket = new Ticket();
+                ticket = _tickets.ObtenerTicket(idTicketEmpezar);
+                int estadoSeleccionado = ticket.EstadoTecnico;
+                ViewBag.ListaPrio = new SelectList(estado, "IdEstado", "Estado", estadoSeleccionado);
+
+                return View(ticket);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Inicio");
+            }
+                
+        }
+
+        public IActionResult ActualizarEstadoTicket(int NuevoEstado, string comentario, int ticket)
+        {
+            var id = HttpContext.Session.GetInt32("UserId") ?? 0;
+            var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            if (id != 0 && tipoUsr == 2)
+            {
+                var response = _tickets.UpdateTicket(NuevoEstado, comentario, ticket);
+                if (response == "1")
+                {
+                    return RedirectToAction("TicketTecnico", "Index");
+                }
+                else
+                {
+                    return RedirectToAction("Inicio", "Index");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Inicio");
+            }
+                
+        }
+
+        public IActionResult Peticion(int idTicket, string motivo)
+        {
+            var id = HttpContext.Session.GetInt32("UserId") ?? 0;
+            var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            if (id != 0 && tipoUsr == 2)
+            {
+                var ticket = new Ticket();
+                ticket = _tickets.ObtenerTicket(idTicket);
+                var peticion = new Peticion();
+                peticion.IdTicket = idTicket;
+                peticion.IdTecnico = ticket.IdTecnico;
+                peticion.EstadoTicket = ticket.EstadoTecnico;
+                peticion.Mensaje = motivo;
+                var response = _tickets.InsPeticion(peticion);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Inicio");
+            }
+               
+        }
+
+
+
+    }
+}

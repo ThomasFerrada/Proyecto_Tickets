@@ -1,0 +1,66 @@
+﻿body {
+    font-family: "Bahnschrift", sans-serif; /* Establece la fuente Bahnschrift como la fuente principal */
+}
+
+.background {
+    background-image: url(../../img/smooth-green-concrete-wall-background.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticket-container {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en una columna */
+}
+
+.title {
+    font-size: 24px;
+    color: #fff; /* Color blanco para el título */
+    text-align: center;
+    margin-bottom: 20px; /* Espacio entre el título y la información del ticket */
+}
+
+.ticket-info {
+    background-color: rgba(255, 255, 255, 0.9); /* Color de fondo transparente para el contenedor de ticket */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Sombra suave alrededor del contenedor */
+    display: grid; /* Cambiar a un diseño de cuadrícula */
+    grid-template-columns: 150px auto; /* Dos columnas, la primera de ancho fijo */
+    gap: 10px; /* Espacio entre las celdas */
+}
+
+.info-label {
+    font-weight: bold;
+    position: relative;
+}
+
+    /* Línea divisoria entre etiqueta y valor */
+    .info-label::after,
+    .info-value::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+    }
+
+.info-value {
+    margin-bottom: 10px;
+    padding-left: 5px; /* Espacio entre la línea divisoria y el valor */
+}
+
+    .info-value textarea {
+        width: calc(100% - 5px); /* Ajustar el ancho para tener en cuenta el espacio agregado */
+        height: 100px;
+        resize: none;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }

@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model ListaPeticion
+
+<table>
+    <tr>
+        <th>Id Ticket</th>
+        <th>Tecnico</th>
+        <th>Estado</th>
+        <th>Examinar</th>
+        <!-- Añade más columnas según los atributos de tu clase Ticket -->
+    </tr>
+    @foreach(var peticion in Model.ListaPet)
+    {
+        <tr>
+            <td>@peticion.IdTicket</td>
+            
+                @foreach (var tecnico in Model.ListaTec)
+                {
+                    if (peticion.IdTecnico==tecnico.IdTecnico)
+                    {
+                        <td>@tecnico.Nombre</td>
+                        break;
+                    }
+                }
+            @foreach (var estado in Model.ListaEstado)
+            {
+                if (peticion.EstadoTicket == estado.IdEstado)
+                {
+                    <td>@estado.Estado</td>
+                    break;
+                }
+            }
+
+            <td>
+                <form asp-action="Examinar" method="post" target="_blank">
+                    <input type="hidden" name="idTicketExaminar" value="@peticion.IdTicket" />
+                    <button class="btnimg" type="submit">
+                        <img class="imgbtn" src="/img/lupa.png" style="width:20px;height:20px" />
+                    </button>
+                </form>
+            </td>
+            
+            <!-- Añade más celdas según los atributos de tu clase Ticket -->
+        </tr>
+    }
+</table>

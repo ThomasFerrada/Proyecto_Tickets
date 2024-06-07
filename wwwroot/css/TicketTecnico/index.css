@@ -1,0 +1,104 @@
+﻿/* Archivo: index.css */
+
+/* Estilos generales */
+body {
+    font-family: 'Bahnschrift', sans-serif;
+    background-image: url('../../img/smooth-green-concrete-wall-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 20px;
+    color: #fff; /* Ajusta el color predeterminado del texto */
+}
+
+h1 {
+    text-align: center;
+    color: #ffff; /* Cambia el color del título aquí */
+    margin-bottom: 20px;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    color: #333; /* Ajusta el color del texto en la tabla */
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    border-left: none;
+}
+
+    td:first-child, th:first-child {
+        border-left: none;
+    }
+
+tr:nth-child(even) {
+    background-color: rgba(242, 242, 242, 0.9); /* Fondo de filas alternas con opacidad */
+}
+
+tr:hover {
+    background-color: rgba(221, 221, 221, 0.9); /* Fondo de fila al pasar el ratón con opacidad */
+}
+
+/* Estilos para botones */
+.btnimg {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+    .btnimg img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .btnimg[disabled] img {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+/* Estilos para la prioridad */
+.baja {
+    color: green;
+}
+
+.media {
+    color: orange;
+}
+
+.alta {
+    color: red;
+}
+
+.center-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .center-button button {
+        background-color: #4CAF50; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px; /* Bordes redondeados */
+        cursor: pointer;
+        font-family: 'Bahnschrift', sans-serif; /* Asegura que la fuente sea consistente */
+    }
+
+        .center-button button:hover {
+            background-color: #45a049; /* Color de fondo al pasar el ratón por encima */
+        }
