@@ -5,25 +5,33 @@
     Layout = null;
 }
 @model Peticion
-<div>
-    <h3>Ticket</h3>
-    <h2>@Model.IdTicket</h2>
-    @Html.DropDownList("Tecnico", (SelectList)ViewBag.ListTec, new { @class = "form-control" })
-    @Html.DropDownList("Estado", (SelectList)ViewBag.ListaEst,new { @class = "form-control" })
-    <h3>Motivo</h3>
-    <textarea>@Model.Mensaje</textarea>
+<link rel="stylesheet" href="~/css/Administrador/Examinar.css" asp-append-version="true" />
 
+<div class="principal">
+    <div class="formulario">
+        <div class="fila textoformulario">
+            <h3>Ticket</h3>
+            <h2>@Model.IdTicket</h2>
+        </div>
+        <div class="fila">
+            @Html.DropDownList("Tecnico", (SelectList)ViewBag.ListTec, new { @class = "form-control" })
+            @Html.DropDownList("Estado", (SelectList)ViewBag.ListaEst, new { @class = "form-control" })
+        </div>
+        <div class="formulario1">
+            <h3 class="textoformulario">Motivo</h3>
+            <textarea id="motivo">@Model.Mensaje</textarea>
+            <form asp-action="Actualizar" method="post" target="_blank">
+                <input type="hidden" name="tec" id="tec" value="@Model.IdTecnico" />
+                <input type="hidden" name="est" id="est" value="" />
+                <input type="hidden" name="tecAn" value="@ViewBag.Tec" />
+                <input type="hidden" name="ticket" value="@Model.IdTicket" />
+                <button class="btnimg" type="submit">
+                    <img class="imgbtn" src="/img/lupa.png" style="width:20px;height:20px" />
+                </button>
+            </form>
+        </div> 
+    </div>
     
-
-    <form asp-action="Actualizar" method="post" target="_blank">
-        <input type="hidden" name="tec" id="tec" value="@Model.IdTecnico" />
-        <input type="hidden" name="est" id="est" value="" />
-        <input type="hidden" name="tecAn" value="@ViewBag.Tec" />
-        <input type="hidden" name="ticket" value="@Model.IdTicket" />
-        <button class="btnimg" type="submit">
-            <img class="imgbtn" src="/img/lupa.png" style="width:20px;height:20px" />
-        </button>
-    </form>
 
 
 </div>

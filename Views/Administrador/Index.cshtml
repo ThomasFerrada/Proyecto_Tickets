@@ -2,50 +2,60 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = null;
 }
 
 @model ListaPeticion
+<link rel="stylesheet" href="~/css/Administrador/Index.css" asp-append-version="true" />
 
-<table>
-    <tr>
-        <th>Id Ticket</th>
-        <th>Tecnico</th>
-        <th>Estado</th>
-        <th>Examinar</th>
-        <!-- Añade más columnas según los atributos de tu clase Ticket -->
-    </tr>
-    @foreach(var peticion in Model.ListaPet)
-    {
-        <tr>
-            <td>@peticion.IdTicket</td>
-            
-                @foreach (var tecnico in Model.ListaTec)
-                {
-                    if (peticion.IdTecnico==tecnico.IdTecnico)
-                    {
-                        <td>@tecnico.Nombre</td>
-                        break;
-                    }
-                }
-            @foreach (var estado in Model.ListaEstado)
+<div class="principal">
+    <div class="label1">
+        <h2>Tickets disponibles</h2>
+    </div>
+    <div class="formulario">
+        <table class="tabla">
+            <tr>
+                <th class="textoformulario">Id Ticket</th>
+                <th class="textoformulario">Tecnico</th>
+                <th class="textoformulario">Estado</th>
+                <th class="textoformulario">Examinar</th>
+                <!-- Añade más columnas según los atributos de tu clase Ticket -->
+            </tr>
+            @foreach (var peticion in Model.ListaPet)
             {
-                if (peticion.EstadoTicket == estado.IdEstado)
-                {
-                    <td>@estado.Estado</td>
-                    break;
-                }
-            }
+                <tr>
+                    <td class="textoformulario">@peticion.IdTicket</td>
 
-            <td>
-                <form asp-action="Examinar" method="post" target="_blank">
-                    <input type="hidden" name="idTicketExaminar" value="@peticion.IdTicket" />
-                    <button class="btnimg" type="submit">
-                        <img class="imgbtn" src="/img/lupa.png" style="width:20px;height:20px" />
-                    </button>
-                </form>
-            </td>
-            
-            <!-- Añade más celdas según los atributos de tu clase Ticket -->
-        </tr>
-    }
-</table>
+                    @foreach (var tecnico in Model.ListaTec)
+                    {
+                        if (peticion.IdTecnico == tecnico.IdTecnico)
+                        {
+                            <td class="textoformulario">@tecnico.Nombre</td>
+                            break;
+                        }
+                    }
+                    @foreach (var estado in Model.ListaEstado)
+                    {
+                        if (peticion.EstadoTicket == estado.IdEstado)
+                        {
+                            <td class="textoformulario">@estado.Estado</td>
+                            break;
+                        }
+                    }
+
+                    <td>
+                        <form asp-action="Examinar" method="post" target="_blank">
+                            <input type="hidden" name="idTicketExaminar" value="@peticion.IdTicket" />
+                            <button class="btnimg" type="submit">
+                                <img class="imgbtn" src="/img/lupa.png" style="width:20px;height:20px" />
+                            </button>
+                        </form>
+                    </td>
+
+                    <!-- Añade más celdas según los atributos de tu clase Ticket -->
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
