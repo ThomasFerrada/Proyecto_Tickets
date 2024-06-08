@@ -1,0 +1,99 @@
+﻿body {
+    margin: 0;
+}
+
+.principal {
+    width: 100%;
+    height: 100%;
+    background-color: aquamarine;
+    background-image: url(../../img/smooth-green-concrete-wall-background.jpg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.formulario {
+    margin-top: 20px;
+    width: 40%;
+    height: 50%;
+    background-color: white;
+    gap: 10px;
+    padding: 20px 15px;
+    border: 1px solid;
+    border-color: transparent;
+    border-top-left-radius: 7%;
+    border-top-right-radius: 7%;
+    border-bottom-left-radius: 7%;
+    border-bottom-right-radius: 7%;
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+}
+
+.formulario1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnimg {
+    width: 50px;
+    color: white;
+    border: 0.5px solid;
+    border-color: darkgrey;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: darkgrey;
+    height: 50px;
+    transition: transform 0.3s;
+}
+
+.fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+#motivo {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    width: 50%;
+    height: 70px;
+    font-family: Bahnschrift;
+    color: gray;
+    resize: none;
+}
+
+.textoformulario {
+    font-family: Bahnschrift;
+    color: rgb(11, 82, 42);
+    font-weight: bold;
+    /*width: 100%;*/
+}
+
+.form-control {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 25px;
+    width: 100%;
+    font-family: Bahnschrift;
+    color: gray;
+}
+
+.btnimg:hover {
+    transform: scale(1.1);
+}
+
