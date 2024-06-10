@@ -21,6 +21,7 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 1)
              {
                 List<Prioridad> list = new List<Prioridad>();
@@ -39,7 +40,7 @@ namespace Proyecto_Tickets.Controllers
         public ActionResult misTickets()
         {
 
-
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
             if (id != 0 && tipoUsr == 1)
@@ -84,6 +85,7 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 1)
             {
                 Ticket ticket = new Ticket();

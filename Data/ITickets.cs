@@ -9,6 +9,7 @@ namespace Proyecto_Tickets.Data
         List<Ticket> ObtenerTickets(int id);
         List<Ticket> ObtenerTicketsTecnico(int id);
         string InsertTicket(Ticket ticket);
+        string CrearUsuario(Cliente? cliente,Tecnico? tecnico,Administrador? administrador);
         string InsPeticion(Peticion peticion);
         string UpdateTicket(int NuevoEstado, string comentario, int ticket);
 

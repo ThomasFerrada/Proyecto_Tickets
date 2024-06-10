@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Proyecto_Tickets.Data;
 using Proyecto_Tickets.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Proyecto_Tickets.Controllers
 {
@@ -17,6 +18,8 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
+
             if (id != 0 && tipoUsr == 3)
             {
                 var view = new ListaPeticion()
@@ -37,6 +40,7 @@ namespace Proyecto_Tickets.Controllers
         }
 
         public IActionResult Examinar(int idTicketExaminar) {
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
 
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
@@ -70,6 +74,7 @@ namespace Proyecto_Tickets.Controllers
 
         public IActionResult Actualizar(int ticket, int tecAn, int tec, int est)
         {
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
 
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
@@ -86,6 +91,34 @@ namespace Proyecto_Tickets.Controllers
                 return RedirectToAction("Index", "Inicio");
             }
                 
+        }
+
+        public IActionResult CrearUsuario(int? tipo, string? nombre,string? correo, string? pwd) {
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
+
+            if (tipo == null && nombre==null&& correo == null && pwd == null)
+            {
+                return View();
+            }
+            var response = "";
+            if (tipo == 1)
+            {
+                Administrador administrador = new Administrador();
+                administrador.Nombre = nombre;
+                administrador.Correo = correo;
+                administrador.Contraseña = pwd;
+                response=_ticket.CrearUsuario(null,null,administrador);
+            }
+            if (tipo == 2)
+            {
+                Tecnico tecnico = new Tecnico();
+                tecnico.Nombre = nombre;
+                tecnico.Correo = correo;
+                tecnico.Contraseña= pwd;
+                response = _ticket.CrearUsuario(null,tecnico,null);
+            }
+            return View();
+
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr=  HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id!=0 && tipoUsr==2)
             {
                 List<Ticket> ticketList = new List<Ticket>();
@@ -70,6 +71,7 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 2)
             {
                 
@@ -88,6 +90,7 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 2)
             {
                 List<EstadoTecnico> estado = new List<EstadoTecnico>();
@@ -110,6 +113,7 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 2)
             {
                 var response = _tickets.UpdateTicket(NuevoEstado, comentario, ticket);
@@ -133,6 +137,7 @@ namespace Proyecto_Tickets.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
+            ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 2)
             {
                 var ticket = new Ticket();

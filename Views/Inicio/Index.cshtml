@@ -4,7 +4,7 @@
 @{
     Layout = null;
 }
-<link rel="stylesheet" href="~/css/Inicio/index.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Inicio/Index.css" asp-append-version="true" />
 
 
 
@@ -26,8 +26,9 @@
             
         </form>
         <div class="preguntas">
-            <a href="www.youtube.com">¿No tienes cuenta?</a>
-            <a href ="www.youtube.com">¿Se te olvido tu contraseña?</a>
+            <a href="@Url.Action("CrearCliente", "Inicio")">¿No tienes cuenta?</a>
+            <a href="@Url.Action("RecuperarContraseña", "Cuenta")">¿Se te olvidó tu contraseña?</a>
+
         </div>
 
     </div>

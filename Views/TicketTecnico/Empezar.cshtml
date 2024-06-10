@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = null;
+    Layout = "_LayoutCliente";
 }
 
 @model Ticket
@@ -48,7 +48,7 @@
                 <div class="textoformulario">
                     <h3>Descripción del problema</h3>
                 </div>
-                <textarea id="descripcion" type="text" name="comentario" placeholder="Descripción (máx. 255 carácteres)"></textarea>
+                <textarea id="descripcion" type="text" name="comentario" >@Model.Descripcion</textarea>
             </div>
             <input type="hidden" name="NuevoEstado" id="NuevoEstado" />
             <input type="hidden" name="ticket" value="@Model.IdTicket" />

@@ -18,6 +18,50 @@ namespace Proyecto_Tickets.Data
             throw new NotImplementedException();
         }
 
+        public string GetUsuario(int? tipo, int? id)
+        {
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                var nombre = "";
+                
+
+                // Determinar el tipo de usuario y la tabla correspondiente
+                if (tipo == 1)
+                {
+                    Cliente cliente = new Cliente();
+                    parametros.Add("@id", id);
+                    string sql = "SELECT * FROM Cliente WHERE idCliente = @id";
+                    cliente = conexion.QuerySingleOrDefault<Cliente>(sql, parametros);
+                    nombre = cliente.Nombre;
+
+                }
+                else if (tipo == 2)
+                {
+                    parametros.Add("@id", id);
+                    Tecnico tecnico = new Tecnico();
+                    parametros.Add("@id", id);
+                    string sql = "SELECT * FROM Tecnico WHERE idTecnico = @id";
+                    tecnico = conexion.QuerySingleOrDefault<Tecnico>(sql, parametros);
+                    nombre = tecnico.Nombre;
+                }
+                else if (tipo == 3)
+                {
+                    parametros.Add("@id", id);
+                    Administrador admin = new Administrador();
+                    parametros.Add("@id", id);
+                    string sql = "SELECT * FROM Administrador WHERE idAdmin = @id";
+                    admin = conexion.QuerySingleOrDefault<Administrador>(sql, parametros);
+                    nombre = admin.Nombre;
+
+                }
+
+                return nombre;
+                
+            }
+            
+        }
+
         //public Cliente ValidateCliente(string username, string password)
         //{
         //    Cliente cliente = new Cliente();  

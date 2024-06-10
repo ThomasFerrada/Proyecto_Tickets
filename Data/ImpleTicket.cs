@@ -315,5 +315,82 @@ namespace Proyecto_Tickets.Data
             }
 
         }
+
+        public string CrearUsuario(Cliente? cliente, Tecnico? tecnico, Administrador? administrador)
+        {
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                string tabla = string.Empty;
+                string sqlObtenerUltimoId = string.Empty;
+                string sqlInsertarUsuario = string.Empty;
+                string campoId = string.Empty;
+                int nuevoId;
+
+                // Determinar el tipo de usuario y la tabla correspondiente
+                if (cliente != null)
+                {
+                    tabla = "Cliente";
+                    parametros.Add("@Nombre", cliente.Nombre);
+                    parametros.Add("@Correo", cliente.Correo);
+                    parametros.Add("@Contraseña", cliente.Contraseña);
+                    parametros.Add("@Empresa", cliente.NomEmpresa);
+                    campoId = "idCliente";
+                }
+                else if (tecnico != null)
+                {
+                    tabla = "Tecnico";
+                    parametros.Add("@Nombre", tecnico.Nombre);
+                    parametros.Add("@Correo", tecnico.Correo);
+                    parametros.Add("@Contraseña", tecnico.Contraseña);
+                    campoId = "idTecnico";
+                }
+                else if (administrador != null)
+                {
+                    tabla = "Administrador";
+                    parametros.Add("@Nombre", administrador.Nombre);
+                    parametros.Add("@Correo", administrador.Correo);
+                    parametros.Add("@Contraseña", administrador.Contraseña);
+                    campoId = "idAdmin";
+                }
+
+                if (string.IsNullOrEmpty(tabla))
+                {
+                    throw new ArgumentException("No se ha proporcionado un usuario válido.");
+                }
+
+                // Obtener el último ID de la tabla correspondiente
+                sqlObtenerUltimoId = $"SELECT ISNULL(MAX({campoId}), 0) FROM {tabla}";
+                nuevoId = conexion.QuerySingle<int>(sqlObtenerUltimoId) + 1;
+
+                // Insertar el nuevo usuario en la tabla correspondiente
+                int filasAfectadas = 0;
+                if (cliente!=null)
+                {
+                    parametros.Add("@Id", nuevoId);
+                    sqlInsertarUsuario = $"INSERT INTO {tabla} ({campoId}, nombre, correo, contrasena,nomEmpresa) VALUES (@Id, @Nombre, @Correo, @Contraseña,@Empresa)";
+                    filasAfectadas = conexion.Execute(sqlInsertarUsuario, parametros);
+
+                }
+                else
+                {
+                    parametros.Add("@Id", nuevoId);
+                    sqlInsertarUsuario = $"INSERT INTO {tabla} ({campoId}, nombre, correo, contrasena) VALUES (@Id, @Nombre, @Correo, @Contraseña)";
+
+                    filasAfectadas = conexion.Execute(sqlInsertarUsuario, parametros);
+                }
+                
+
+                if (filasAfectadas > 0)
+                {
+                    return "Usuario creado con éxito.";
+                }
+                else
+                {
+                    return "Error al crear el usuario.";
+                }
+            }
+        }
+
     }
 }
