@@ -2,6 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = "_LayoutCliente";
 }
 
 <link rel="stylesheet" href="~/css/TicketTecnico/examinar.css" asp-append-version="true" />
@@ -14,6 +15,7 @@
         <div class="ticket-info">
             <div class="info-label">id Ticket:</div>
             <div class="info-value">@Model.IdTicket</div>
+            @* addasd *@
 
 <h1>Ticket: @Model.IdTicket</h1>
 <h1>Estado: @Model.EstTec</h1>

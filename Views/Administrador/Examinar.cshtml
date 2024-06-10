@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutCliente";
+}
+@model Peticion
+<link rel="stylesheet" href="~/css/Administrador/Examinar.css" asp-append-version="true" />
+
+<div class="principal">
+    <div class="formulario">
+        <div class="fila textoformulario">
+            <h3>Ticket</h3>
+            <h2>@Model.IdTicket</h2>
+        </div>
+        <div class="fila">
+            @Html.DropDownList("Tecnico", (SelectList)ViewBag.ListTec, new { @class = "form-control" })
+            @Html.DropDownList("Estado", (SelectList)ViewBag.ListaEst, new { @class = "form-control" })
+        </div>
+        <div class="formulario1">
+            <h3 class="textoformulario">Motivo</h3>
+            <textarea id="motivo">@Model.Mensaje</textarea>
+            <form asp-action="Actualizar" method="post" target="_blank">
+                <input type="hidden" name="tec" id="tec" value="@Model.IdTecnico" />
+                <input type="hidden" name="est" id="est" value="" />
+                <input type="hidden" name="tecAn" value="@ViewBag.Tec" />
+                <input type="hidden" name="ticket" value="@Model.IdTicket" />
+                <button class="btnimg" type="submit">
+                    <img class="imgbtn" src="/img/lupa.png" style="width:20px;height:20px" />
+                </button>
+            </form>
+        </div> 
+    </div>
+    
+
+
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        // Evento change para el DropDownList de Técnico
+       
+    });
+    $('#Tecnico').change(function () {
+        var valorTecnico = $(this).val();
+        console.log(valorTecnico);
+        $('#tec').val(valorTecnico);
+    });
+
+    // Evento change para el DropDownList de Estado
+    $('#Estado').change(function () {
+        var valorEstado = $(this).val();
+        console.log(valorEstado);
+        $('#est').val(valorEstado);
+    });
+</script>
+

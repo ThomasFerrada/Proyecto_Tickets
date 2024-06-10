@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BccM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Proyecto_Tickets.styles.css" asp-append-version="true" />
+
+</head>
+<body>
+    <header>
+        <nav class="navegacion">
+            <div class="uno">   
+                <img class="imgbtn" src="~/img/Logo.png" alt="Examinar" />
+            </div>
+            <div class="uno">
+                <div class="usuario">
+                    <img class="avatar" src="~/img/avatar.png" alt="Examinar" />
+                    <span>@ViewBag.NombreUsuario</span>
+                    <button class="btn-abajo">
+                        <img class="abajo" src="~/img/abajo.png" alt="Examinar" />
+                    </button>
+                    
+                </div>
+                
+                <div class="cerrarSesion" >
+                    <form asp-action="CerrarSesion" asp-controller="Inicio" method="post">
+                        <button class="btncerrar" type="submit">Cerrar Sesión</button>
+                        
+                    </form>
+                    <img class="out" src="~/img/cerrar-sesion.png" alt="Examinar" />
+                </div>
+            </div>
+            
+            
+            
+            
+        </nav>
+    </header>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="foo">
+            &copy; 2024 - BccM | Derechos Reservados
+        </div>
+    </footer>
+
+
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnAbajo = document.querySelector('.btn-abajo');
+        const cerrarSesionDiv = document.querySelector('.cerrarSesion');
+
+        btnAbajo.addEventListener('click', function () {
+            cerrarSesionDiv.classList.toggle('mostrar');
+        });
+    });
+</script>

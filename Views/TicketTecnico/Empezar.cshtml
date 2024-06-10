@@ -2,35 +2,69 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = null;
+    Layout = "_LayoutCliente";
 }
 
 @model Ticket
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/TicketTecnico/Empezar.css" asp-append-version="true" />
+<div class="principal">
+    <div class="label1">
+        <h2>Información del Ticket</h2>
+    
+    @if (Model.IdPrioridad>4)
+    {
+       <div>
+           <button id="solitud"> Solicitud de cambio</button>
+        </div>
+    }
 
-@using (Html.BeginForm("ActualizarEstadoTicket", "TicketTecnico", FormMethod.Post, new { @class = "full-width-form" }))
-{
-    <input id="valor" type="hidden" value="@Model.EstadoTecnico" />
-    <div class="fila">
-        <div class="textoformulario">
-            <h3>Seleccione categoría del problema</h3>
+    <div id="motivo" style="display:none">
+        <h3>Motivo de la solicitud</h3>
+            <form asp-action="Peticion" method="post" target="_blank">
+                <input type="hidden" name="idTicket" value="@Model.IdTicket" />
+                <textarea name="motivo"></textarea>
+                <button class="btnimg" type="submit">
+                    Ingresar
+                </button>
+            </form>
+    </div>
+    
+        
+    @using (Html.BeginForm("ActualizarEstadoTicket", "TicketTecnico", FormMethod.Post, new { @class = "full-width-form" }))
+    {
+        
+        <input id="valor" type="hidden" value="@Model.EstadoTecnico" />
+        <div class="formulario">
+            <div class="fila">
+                <div class="textoformulario">
+                    <h3>Cambiar estado del ticket</h3>
+                </div>
+                @Html.DropDownList("Estado", (SelectList)ViewBag.ListaPrio, new { @class = "form-control" })
+            </div>
+            <div class="fila">
+                <div class="textoformulario">
+                    <h3>Descripción del problema</h3>
+                </div>
+                <textarea id="descripcion" type="text" name="comentario" >@Model.Descripcion</textarea>
+            </div>
+            <input type="hidden" name="NuevoEstado" id="NuevoEstado" />
+            <input type="hidden" name="ticket" value="@Model.IdTicket" />
+            <div class="fila1">
+                <div class="button-container">
+                    <button id="botonvolver" type="submit">Volver</button>
+                </div>
+                <div class="button-container">
+                    <button id="botoncrear" type="submit">Modificar</button>
+                </div>
+            </div>
         </div>
-        @Html.DropDownList("Estado", (SelectList)ViewBag.ListaPrio, new { @class = "form-control" })
-    </div>
-    <div class="fila">
-        <div class="textoformulario">
-            <h3>Ingrese descripción del problema</h3>
-        </div>
-        <textarea id="descripcion" type="text" name="comentario" placeholder="Descripción (máx. 255 carácteres)"></textarea>
-    </div>
-    <input type="hidden" name="NuevoEstado" id="NuevoEstado" />
-    <input type="hidden" name="ticket" value="@Model.IdTicket" />
-    <div class="button-container">
-        <button id="botoncrear" type="submit">Crear</button>
-    </div>
-}
+
+    }
+</div>
+
 
 
 
@@ -45,4 +79,14 @@
             $('#NuevoEstado').val(valorSeleccionado);
         });
     });
+
+        document.getElementById("solitud").addEventListener("click", function () {
+            var miDiv = document.getElementById("motivo");
+            if (miDiv.style.display === "none" || miDiv.style.display === "") {
+                miDiv.style.display = "flex";
+            } else {
+                miDiv.style.display = "none";
+            }
+        });
+
 </script>

@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+    <h2>
+        Crear Usuario
+    </h2>
+    <div>
+        <form asp-action="CrearCliente" method="post">
+            <h3>Nombre Usuario</h3>
+            <input name="nombre"></input>
+            <h3>Correo Usuario</h3>
+            <input name="correo"></input>
+            <h3>Contraseña Usuario</h3>
+            <input name="pwd"></input>
+            <h3>Empresa</h3>
+            <input name="empresa"></input>
+            <button type="submit">Crear</button>
+        </form>
+    </div>
+</div>
