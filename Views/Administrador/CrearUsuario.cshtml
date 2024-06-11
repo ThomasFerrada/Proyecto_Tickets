@@ -7,27 +7,45 @@
 
 
 
-
-<div>
-    <h2>
-        Crear Usuario
-    </h2>
-    <h3>Tipo usuario</h3>
-    <h4>Administrador</h4>
-    <input id="admin" type="checkbox"></input>
-    <h4>Tecnico</h4>
-    <input id="tec" type="checkbox"></input>
-    <div>
-        <form asp-action="CrearUsuario" method="post">
-            <h3>Nombre Usuario</h3>
-            <input name="nombre"></input>
-            <h3>Correo Usuario</h3>
-            <input name="correo"></input>
-            <h3>Contraseña Usuario</h3>
-            <input name="pwd"></input>
-            <input id="userType" name="tipo" type="hidden"></input>
-            <button type="submit">Crear</button>
-        </form>
+<link rel="stylesheet" href="~/css/Administrador/CrearUsuario.css" asp-append-version="true" />
+<div class="principal">
+    <div class="label1">
+        <h2>
+            Crear Usuario
+        </h2>
+    </div>
+    <div class="formulario">
+        <h3 class="textoformulario">Tipo usuario</h3>
+        <table>
+            <tr>
+                <td><h4 class="textoformulario">Administrador</h4></td>
+                <td><input id="admin" type="checkbox"></input></td>
+            </tr>
+            <tr>
+                <td><h4 class="textoformulario">Tecnico</h4></td>
+                <td><input id="tec" type="checkbox"></input></td>
+            </tr>
+        </table>
+        <div>
+            <form asp-action="CrearUsuario" method="post">
+                <div class="fila">
+                    <h3 class="textoformulario">Nombre Usuario</h3>
+                    <input class="input" name="nombre"></input>
+                </div>
+                <div class="fila">
+                    <h3 class="textoformulario">Correo Usuario</h3>
+                    <input class="input" name="correo"></input>
+                </div>
+                <div class="fila">
+                    <h3 class="textoformulario">Contraseña Usuario</h3>
+                    <input class="input" name="pwd"></input>
+                </div>
+                <input id="userType" name="tipo" type="hidden"></input>
+                <div class="button-container">
+                    <button id="botoncrear" type="submit">Crear</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
