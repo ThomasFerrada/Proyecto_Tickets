@@ -8,11 +8,16 @@
     padding: 20px;
     color: #fff; /* Ajusta el color predeterminado del texto */
 }
+
+.Cuerpo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .principal {
     width: 100%;
-    
     background-color: aquamarine;
     background-image: url(../../img/smooth-green-concrete-wall-background.jpg);
     display: flex;
@@ -42,8 +47,8 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     gap: 5px;
     margin-top: 20px;
 }
