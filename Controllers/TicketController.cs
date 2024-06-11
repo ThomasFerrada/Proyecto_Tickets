@@ -27,6 +27,21 @@ namespace Proyecto_Tickets.Controllers
                 List<Prioridad> list = new List<Prioridad>();
                 list = _ticket.ObtenerPrio();
                 ViewBag.ListaPrio = new SelectList(list, "IdPrioridad", "Categoria");
+                
+                List<Notificaciones> notificaciones = new List<Notificaciones>();
+                notificaciones = _ticket.ObtenerNotificaciones(id);
+                var viewModel = notificaciones.Select(n => new Notificaciones
+                {
+                    IdNotificacion = n.IdNotificacion,
+                    IdTicket = n.IdTicket,
+                    IdCliente = n.IdCliente,
+                    IdTecnico = n.IdTecnico,
+                    Bitacora = n.Bitacora,
+                    Visto = n.Visto
+                }).ToList();
+
+                ViewBag.Notificaciones = viewModel;
+
                 return View();
             }
             else
@@ -70,6 +85,20 @@ namespace Proyecto_Tickets.Controllers
                     item.EstCli = estadocl;
 
                 }
+                List<Notificaciones> notificaciones = new List<Notificaciones>();
+                notificaciones = _ticket.ObtenerNotificaciones(id);
+                var viewModel = notificaciones.Select(n => new Notificaciones
+                {
+                    IdNotificacion = n.IdNotificacion,
+                    IdTicket = n.IdTicket,
+                    IdCliente = n.IdCliente,
+                    IdTecnico = n.IdTecnico,
+                    Bitacora = n.Bitacora,
+                    Visto = n.Visto
+                }).ToList();
+
+                ViewBag.Notificaciones = viewModel;
+
 
                 return View(list);
             }
@@ -117,11 +146,19 @@ namespace Proyecto_Tickets.Controllers
                 var response = _ticket.InsertTicket(ticket);
                 if (response == "OK")
                 {
-                    return RedirectToAction("Ticket", "Index");
+                    Notificaciones notificaciones = new Notificaciones();
+                    notificaciones.IdTicket = ticket.IdTicket;
+                    notificaciones.IdCliente = ticket.IdCliente;
+                    notificaciones.IdTecnico = ticket.IdTecnico;
+                    var mensaje = "Su Ticket N°"+ticket.IdTicket+" ha sido ingresado correctamente";
+                    notificaciones.Bitacora = mensaje;
+                    notificaciones.Visto = false;
+                    var response2 = _ticket.UpdateNotificacion(notificaciones);
+                    return RedirectToAction("misTickets", "Ticket");
                 }
                 else
                 {
-                    return RedirectToAction("Ticket", "Index");
+                    return RedirectToAction("Index", "Ticket");
                 }
             }
             else
@@ -133,7 +170,24 @@ namespace Proyecto_Tickets.Controllers
             
         }
 
-        
+        public ActionResult Details(int idTicket, int idNotificacion, string vistaOrigen)
+        {
+            
+            Notificaciones notificaciones= new Notificaciones();
+            notificaciones=_ticket.Notifificacion(idNotificacion);
+            TempData["bitacora"] = notificaciones.Bitacora;
+            TempData["ticket"] = idTicket;
+            TempData["notificacion"] = idNotificacion;
+            return RedirectToAction(vistaOrigen, "Ticket");
+        }
+
+        public IActionResult MarcarLeido(int notificacion, string vistaOrigen)
+        {
+            var response=_ticket.UpdateEstadoNoti(notificacion);
+            return RedirectToAction(vistaOrigen, "Ticket");
+        }
+
+
 
 
     }

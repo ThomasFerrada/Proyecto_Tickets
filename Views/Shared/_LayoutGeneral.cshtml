@@ -17,33 +17,6 @@
             </div>
             <div class="uno">
                 
-                <div class="notificacion-contenedor">
-                    <div class="icono-campana" onclick="togglePanel()">
-                        <img class="bell" src="~/img/notificacion.png" alt="Examinar" />
-                        <i class="fas fa-bell"></i>
-                        <span class="contador" id="contador-notificaciones" style="@(ViewBag.Notificaciones != null && ((List<Notificaciones>)ViewBag.Notificaciones).Count == 0 ? "display: none;" : "")">
-                            @(ViewBag.Notificaciones != null ? ((List<Notificaciones>)ViewBag.Notificaciones).Count : 0)
-                        </span>
-                    </div>
-                    <div class="panel-notificaciones" id="panel-notificaciones">
-                        @if (ViewBag.Notificaciones != null && ((List<Notificaciones>)ViewBag.Notificaciones).Any())
-                        {
-                            foreach (var notificacion in (List<Notificaciones>)ViewBag.Notificaciones)
-                            {
-                                <div class="notificacion">
-                                    <a href="@Url.Action("Details", "Ticket", new { idTicket = notificacion.IdTicket,idNotificacion = notificacion.IdNotificacion,vistaOrigen = ViewContext.RouteData.Values["action"] })">@notificacion.Bitacora</a>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            <div class="vacio">No hay notificaciones</div>
-                        }
-                    </div>
-                </div>
-            </div>
-            <div class="uno">
-                
                 <div class="usuario">
                     <img class="avatar" src="~/img/avatar.png" alt="Examinar" />
                     <span>@ViewBag.NombreUsuario</span>

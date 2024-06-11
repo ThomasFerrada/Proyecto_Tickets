@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = "_LayoutCliente";
+    Layout = "_LayoutGeneral";
 }
 
 @model Ticket
@@ -52,6 +52,13 @@
             </div>
             <input type="hidden" name="NuevoEstado" id="NuevoEstado" />
             <input type="hidden" name="ticket" value="@Model.IdTicket" />
+            
+            
+             <input type="hidden" name="estadoAnterior" value="@Model.EstadoTecnico" />
+             <div class="finalizado" id="divFina"style="display:none">
+                    <h3>Ingrese Comentario</h3>
+                    <textarea name="mensaje"></textarea>
+             </div>
             <div class="fila1">
                 <div class="button-container">
                     <button id="botonvolver" type="submit">Volver</button>
@@ -89,4 +96,20 @@
             }
         });
 
+        $('#Estado').change(function () {
+            // Obtener el valor seleccionado del DropDownList
+            var valorSeleccionado = $(this).val();
+
+            var miDiv = document.getElementById("divFina");
+
+            if (valorSeleccionado==4){
+                miDiv.style.display = "flex";
+            }
+            else {
+                miDiv.style.display = "none";
+            }
+            
+        });
+
+        
 </script>

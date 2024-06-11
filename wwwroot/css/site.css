@@ -110,3 +110,113 @@
     height: 50px;
     background-color: rgb(33, 61, 59);
 }
+
+.campana{
+    width:30px;
+    height:30px;
+}
+
+.camp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.panel {
+    max-height: 0;
+    position: absolute;
+    overflow: hidden;
+    margin-top: 80px;
+    transition: max-height 0.5s ease-out;
+    gap: 5px;
+}
+
+    .panel.mostrar {
+        position: absolute;
+        margin-top: 80px;
+        width: 130px;
+        height: auto; /* Ajusta la altura automáticamente */
+        background-color: rgb(33, 61, 59);
+        border: solid 1px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        max-height: 200px; /* Ajusta este valor según la altura de tu contenido */
+        transition: max-height 0.5s ease-in-out;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+
+
+.notificacion-contenedor {
+    position: relative;
+    display: inline-block;
+}
+
+.icono-campana {
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+}
+
+    .icono-campana .contador {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 5px;
+        font-size: 12px;
+    }
+
+.panel-notificaciones {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    z-index: 1;
+}
+
+    .panel-notificaciones .notificacion {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .panel-notificaciones .notificacion:last-child {
+            border-bottom: none;
+        }
+
+        .panel-notificaciones .notificacion:hover {
+            background-color: #f1f1f1;
+        }
+
+    .panel-notificaciones a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .panel-notificaciones .vacio {
+        text-align: center;
+        padding: 10px;
+        color: #888;
+    }
+
+
+.panelnotif{
+    background-color:red;
+    width:100px;
+    height:100px;
+}
+
+.bell{
+    width:30px;
+    height:30px;
+}

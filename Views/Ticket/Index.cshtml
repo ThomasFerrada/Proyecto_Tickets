@@ -10,6 +10,18 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <link rel="stylesheet" href="~/css/Ticket/Index.css" asp-append-version="true" />
+<div id="fondoOscuro"></div>
+<div class="panelnotif" style="display:none;" data-ticket="@TempData["ticket"]" data-bitacora="@TempData["bitacora"]">
+    <button onclick="cerrar()" class="cerrar">X</button>
+    <h3>Ticket N° @TempData["ticket"]</h3>
+    <textarea>@TempData["bitacora"]</textarea>
+    <form asp-action="MarcarLeido" method="post">
+        <input type="type" name="notificacion" value="@TempData["notificacion"]" />
+        <input type="type" name="vistaOrigen" value="Index" />
+        <button type="submit" class="leido">Marcar como leido</button>
+    </form>
+    
+</div>
 <div class="principal">
     <div class="label1">
         <h2>Crear consulta técnica</h2>
@@ -54,7 +66,35 @@
                 console.log(valorSeleccionado);
                 $('#prioridad').val(valorSeleccionado);
             });
+
+        const panelNotif = $('.panelnotif');
+        const panelprincipal = $('.principal');
+
+        // Check if the data attributes are set
+        const ticket = panelNotif.data('ticket');
+        const bitacora = panelNotif.data('bitacora');
+
+        if (ticket && bitacora) {
+            panelNotif.css('display', 'block');
+            
+            $('#fondoOscuro').css('display', 'block'); // Mostrar fondo oscuro
+        }
         });
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnAbajo = document.querySelector('.btn-abajo');
+        const cerrarSesionDiv = document.querySelector('.cerrarSesion');
+
+        btnAbajo.addEventListener('click', function () {
+            cerrarSesionDiv.classList.toggle('mostrar');
+        });
+    });
+
+    function cerrar() {
+        const panelNotif = $('.panelnotif');
+        const panelprincipal = $('.principal');
+        panelNotif.css('display', 'none');
+        $('#fondoOscuro').css('display', 'none');
+    }
     </script>
 
 
