@@ -5,13 +5,19 @@ namespace Proyecto_Tickets.Data
     public interface ITickets
     {
         Ticket ObtenerTicket(int id);
+        Notificaciones Notifificacion(int id);
         Peticion ObtenerPeticion(int id);
         List<Ticket> ObtenerTickets(int id);
         List<Ticket> ObtenerTicketsTecnico(int id);
+        List<Notificaciones> ObtenerNotificaciones(int id);
         string InsertTicket(Ticket ticket);
-        string CrearUsuario(Cliente? cliente,Tecnico? tecnico,Administrador? administrador);
+        string CrearUsuario(Cliente? cliente, Tecnico? tecnico, Administrador? administrador);
         string InsPeticion(Peticion peticion);
-        string UpdateTicket(int NuevoEstado, string comentario, int ticket);
+        string UpdateNotificacion(Notificaciones notificaciones);
+        string UpdateEstadoNoti(int notificacion);
+        string UpdateTicket(int tecnico,int estadoAnterior, int NuevoEstado, string comentario, int ticket);
+
+        
 
         string UpdateEstadoAdmin(int ticket, int tecAn, int tec,  int est);
         

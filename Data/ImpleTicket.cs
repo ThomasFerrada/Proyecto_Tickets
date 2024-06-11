@@ -81,7 +81,7 @@ namespace Proyecto_Tickets.Data
                 parametros2.Add("@aumentoCargaTrabajo", 1);
                 parametros2.Add("@idTecnico", ticket.IdTecnico);
                 
-                 sql= "UPDATE Tecnico SET cargaTrabajo = cargaTrabajo + @aumentoCargaTrabajo WHERE idTecnico = @idTecnico";
+                 sql= "UPDATE Tecnico SET cargaTrabajo = ISNULL(cargaTrabajo, 0) + @aumentoCargaTrabajo WHERE idTecnico = @idTecnico";
                 var response2= conexion.Execute(sql, parametros2);
                 if (response==1 && response2==1)
                 {
@@ -165,7 +165,7 @@ namespace Proyecto_Tickets.Data
             return listaTecnico;
         }
 
-        public string UpdateTicket(int NuevoEstado, string comentario, int ticket)
+        public string UpdateTicket(int tecnico, int estadoAnterior, int NuevoEstado, string comentario, int ticket)
         {
 
             
@@ -175,8 +175,17 @@ namespace Proyecto_Tickets.Data
                 parametros.Add("@NuevoEstado", NuevoEstado);
                 parametros.Add("@Comentario", comentario);
                 parametros.Add("@IdTicket", ticket);
+                string sql = "";
+                if (estadoAnterior == 1)
+                {
+                    var parametros2 = new DynamicParameters();
+                    parametros2.Add("@idTecnico", tecnico);
+                    string query = "UPDATE Ticket SET estadoTecnico = 3 WHERE idTecnico = @idTecnico AND idPrioridad < 5 AND estadoTecnico = 2 ";
+                    var response2 = conexion.Execute(query, parametros2);
+                }
 
-                string sql = "UPDATE Ticket SET estadoTecnico = @NuevoEstado, ComentarioTec = @Comentario";
+
+                sql = "UPDATE Ticket SET estadoTecnico = @NuevoEstado, ComentarioTec = @Comentario";
 
                 // Si el NuevoEstado no es igual a 3, también actualizamos el EstadoClie
                 if (NuevoEstado != 3)
@@ -185,9 +194,19 @@ namespace Proyecto_Tickets.Data
                 }
 
                 sql += " WHERE idTicket = @IdTicket";
+                var response = conexion.Execute(sql, parametros);
 
-                // Ejecutamos el UPDATE
-                var response= conexion.Execute(sql, parametros);
+                
+                if (NuevoEstado==4)
+                {
+                    var parametros2 = new DynamicParameters();
+                    parametros2.Add("@idTicket", ticket);
+                    string query = "DELETE FROM Ticket WHERE idTicket = @idTicket";
+                    var response2 = conexion.Execute(query, parametros2);
+                }
+
+                
+                
                 return response.ToString();
             }
             
@@ -392,5 +411,77 @@ namespace Proyecto_Tickets.Data
             }
         }
 
+        public string UpdateNotificacion(Notificaciones notificaciones)
+        {
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+
+                var parametros = new DynamicParameters();
+                parametros.Add("@idTicket", notificaciones.IdTicket);
+                parametros.Add("@idCliente", notificaciones.IdCliente);
+                parametros.Add("@idTecnico", notificaciones.IdTecnico);
+                parametros.Add("@bitacora", notificaciones.Bitacora);
+                parametros.Add("@visto", notificaciones.Visto);
+                
+                string sql = "INSERT INTO Notificaciones (idTicket, idCliente, idTecnico, bitacora, visto) " +
+                             "VALUES (@idTicket,@idCliente, @idTecnico, @bitacora, @visto)";
+                var response = conexion.Execute(sql, parametros);
+
+                
+               
+               return response.ToString();
+            }
+        }
+
+        public List<Notificaciones> ObtenerNotificaciones(int id)
+        {
+            List<Notificaciones> notificaciones = new List<Notificaciones>();
+
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                parametros.Add("@IdCliente", id);
+
+                string sql = "SELECT * FROM Notificaciones WHERE idCliente = @IdCliente AND visto=0";
+
+                 notificaciones = conexion.Query<Notificaciones>(sql, parametros).ToList();
+
+
+
+            }
+            return notificaciones;
+        }
+
+        public Notificaciones Notifificacion(int id)
+        {
+            Notificaciones notificaciones = new Notificaciones();
+
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                parametros.Add("@IdNotificacion", id);
+
+                string sql = "SELECT * FROM Notificaciones WHERE idNotificacion = @IdNotificacion";
+
+                notificaciones = conexion.QuerySingleOrDefault<Notificaciones>(sql, parametros);
+
+
+
+            }
+            return notificaciones;
+
+        }
+
+        public string UpdateEstadoNoti(int notificacion)
+        {
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                parametros.Add("@idNotificacion", notificacion);
+                string query = "UPDATE Notificaciones SET visto = 1   WHERE idNotificacion = @idNotificacion";
+                var response2 = conexion.Execute(query, parametros);
+                return response2.ToString();
+            }
+        }
     }
 }

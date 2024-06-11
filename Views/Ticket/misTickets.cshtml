@@ -4,28 +4,20 @@
 @{
     Layout = "_LayoutCliente";
 }
-
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Control de Tickets</title>
     <link rel="stylesheet" href="~/css/Ticket/misTickets.css"> <!-- Asegúrate de que la ruta sea correcta -->
-    <style>
-        .container {
-            /* Estilos del contenedor */
-            text-align: center; /* Centrar contenido */
-        }
+<div id="fondoOscuro"></div>
+<div class="panelnotif" style="display:none;" data-ticket="@TempData["ticket"]" data-bitacora="@TempData["bitacora"]">
+    <button onclick="cerrar()" class="cerrar">X</button>
+    <h3>Ticket N° @TempData["ticket"]</h3>
+    <textarea>@TempData["bitacora"]</textarea>
+    <form asp-action="MarcarLeido" method="post">
+        <input type="type" name="notificacion" value="@TempData["notificacion"]" />
+        <input type="type" name="vistaOrigen" value="Index" />
+        <button type="submit" class="leido">Marcar como leido</button>
+    </form>
 
-        .center-button {
-            display: inline-block; /* Convertir a bloque para centrar aassdasd*/
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
+</div>
+<div class="principal">
         <h1>Panel de Control de Tickets</h1>
         <table>
             <tr>
@@ -50,14 +42,31 @@
             <!-- Div para centrar el botón -->
             <button onclick="redirigir()">Cerrar Sesión</button> <!-- Agregar botón "Salir" con función de redirección -->
         </div>
-    </div>
+
+</div>
 
     <!-- Script para la función de redirección -->
     <script>
-        function redirigir() {
-            // Redirigir al usuario a otra página
-            window.location.href = "http://localhost:5000/Inicio/Index"; // Cambia "otra_pagina.html" por la URL deseada
+        $(document).ready(function () {
+            
+            const panelNotif = $('.panelnotif');
+            const panelprincipal = $('.principal');
+
+            // Check if the data attributes are set
+            const ticket = panelNotif.data('ticket');
+            const bitacora = panelNotif.data('bitacora');
+
+            if (ticket && bitacora) {
+                panelNotif.css('display', 'block');
+
+                $('#fondoOscuro').css('display', 'block'); // Mostrar fondo oscuro
+            }
+        });
+        function cerrar() {
+            const panelNotif = $('.panelnotif');
+            const panelprincipal = $('.principal');
+            panelNotif.css('display', 'none');
+            $('#fondoOscuro').css('display', 'none');
         }
     </script>
-</body>
-</html>
+

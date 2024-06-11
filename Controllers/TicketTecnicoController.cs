@@ -74,9 +74,26 @@ namespace Proyecto_Tickets.Controllers
             ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 2)
             {
-                
+                var estado = "";
                 Ticket ticket = new Ticket();
                 ticket = _tickets.ObtenerTicket(idTicketExaminar);
+                if (ticket.IdTecnico == 1)
+                {
+                    estado = "Nuevo";
+                }
+                else if (ticket.IdTecnico == 2)
+                {
+                    estado = "Desarrollo";
+                }
+                else if (ticket.IdTecnico == 3)
+                {
+                    estado = "Pausa";
+                }
+                else if (ticket.IdTecnico == 4)
+                {
+                    estado = "Finalizado";
+                }
+                ViewBag.estado = estado;
                 return View(ticket);
             }
             else
@@ -109,17 +126,34 @@ namespace Proyecto_Tickets.Controllers
                 
         }
 
-        public IActionResult ActualizarEstadoTicket(int NuevoEstado, string comentario, int ticket)
+        public IActionResult ActualizarEstadoTicket(int estadoAnterior, int NuevoEstado, string comentario, int ticket, string? mensaje)
         {
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
             ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
             if (id != 0 && tipoUsr == 2)
             {
-                var response = _tickets.UpdateTicket(NuevoEstado, comentario, ticket);
+                Ticket ticket1 = new Ticket();
+                Notificaciones notificaciones = new Notificaciones();
+                ticket1 = _tickets.ObtenerTicket(ticket);
+                var response = _tickets.UpdateTicket(id,estadoAnterior, NuevoEstado, comentario, ticket);
                 if (response == "1")
                 {
-                    return RedirectToAction("TicketTecnico", "Index");
+                    notificaciones.IdTicket = ticket;
+                    notificaciones.IdCliente = ticket1.IdCliente;
+                    notificaciones.IdTecnico = ticket1.IdTecnico;
+                    if (mensaje==null && NuevoEstado==2)
+                    {
+                        mensaje = "Su ticket N° "+ticket+" esta siendo atendido";
+                    }
+                    else if (NuevoEstado == 4)
+                    {
+                        mensaje = "Su Ticket N° "+ticket+" ha sido finalizado, comentario del tecnico: " + mensaje;
+                    }
+                    notificaciones.Bitacora = mensaje;
+                    notificaciones.Visto = false;
+                    var response2 = _tickets.UpdateNotificacion(notificaciones);
+                    return RedirectToAction("Index", "TicketTecnico");
                 }
                 else
                 {
