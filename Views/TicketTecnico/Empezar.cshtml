@@ -23,7 +23,7 @@
 
     <div id="motivo" style="display:none">
         <h3>Motivo de la solicitud :</h3>
-            <form asp-action="Peticion" method="post" target="_blank">
+            <form asp-action="Peticion" method="post">
                 <input type="hidden" name="idTicket" value="@Model.IdTicket" />
                 <textarea name="motivo"></textarea>
                 <button class="btnimg" type="submit">

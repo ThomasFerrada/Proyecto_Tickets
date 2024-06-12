@@ -184,7 +184,7 @@ namespace Proyecto_Tickets.Controllers
         public IActionResult MarcarLeido(int notificacion, string vistaOrigen)
         {
             var response=_ticket.UpdateEstadoNoti(notificacion);
-            return RedirectToAction(vistaOrigen, "misTickets");
+            return RedirectToAction("misTickets", "Ticket");
         }
 
 
