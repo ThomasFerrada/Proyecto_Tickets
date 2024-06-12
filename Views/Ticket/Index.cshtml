@@ -38,7 +38,7 @@
             </div>
             <div class="fila">
                 <div class="textoformulario">
-                    <h3>Ingrese descripción del problema</h3>
+                    <h3>Describa su problema :</h3>
                 </div>
                 <textarea id="descripcion" type="text" name="descripcion" placeholder="Descripción (máx. 255 carácteres)"></textarea>
             </div>
@@ -49,7 +49,7 @@
         }
     </div>
     <div class="button-container">
-        <button id="botoncerrar" onclick="cerrarVentana()">Cerrar Ventana</button>
+        <button id="botoncerrar" onclick="cerrarVentana()">Volver</button>
     </div>
 </div>
 
@@ -97,7 +97,7 @@
         $('#fondoOscuro').css('display', 'none');
     }
     function cerrarVentana() {
-        window.close();
+        window.location.href = "/Ticket/misTickets";
     }
     </script>
 

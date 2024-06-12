@@ -59,6 +59,8 @@
     </div>
     <div class="center-button">
         <button onclick="abrirCrearUsuario()">Crear Usuario</button>
+        <button onclick="abrirListaTickets()">Ver Tickets</button>
+        <button onclick="abrirListaUsuarios()">Ver Usuarios</button>
 
     </div>
 </div>
@@ -69,5 +71,16 @@
     function abrirCrearUsuario() {
         window.open("/Administrador/CrearUsuario", "_blank");
     }
+
+    function abrirListaTickets() {
+        // Redirigir al usuario a otra página
+        window.location.href = "/Administrador/ListaTickets"; //
+    }
+
+    function abrirListaUsuarios() {
+        // Redirigir al usuario a otra página
+        window.location.href = "/Administrador/ListaUsuarios"; //
+    }
 </script>
+@* FINAL *@
 
