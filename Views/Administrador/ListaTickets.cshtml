@@ -6,45 +6,48 @@
     Layout = "_LayoutGeneral";
 
 }
-@model IEnumerable<Proyecto_Tickets.Models.Ticket>;
-<div class="principal">
-    <div class="label1">
-        <h2>Tickets en el sistema</h2>
-    </div>
-    <div class="formulario">
-        <table>
-            <tr>
-                <th>Id Ticket</th>
-                <th>Id Cliente</th>
-                <th>Id Tecnico</th>
-                <th>Descripción</th>
-                <th>Estado Tecnico</th>
-                <th>Prioridad</th>
-                <!-- Añade más columnas según los atributos de tu clase Ticket -->
-            </tr>
-            @foreach (var ticket in Model)
-            {
+@model IEnumerable<Proyecto_Tickets.Models.Ticket>
+
+<link rel="stylesheet" href="~/css/Administrador/ListaTickets.css" asp-append-version="true" />
+
+<div class="content-container">
+    <div class="principal">
+        <div class="label1">
+            <h2>Tickets en el sistema</h2>
+        </div>
+        <div class="formulario">
+            <table>
                 <tr>
-                    <td>@ticket.IdTicket</td>
-                    <td>@ticket.IdCliente</td>
-                    <td>@ticket.IdTecnico</td>
-                    <td>@ticket.Descripcion</td>
-                    <td>@ticket.EstadoTecnico</td>
-                    <td>@ticket.IdPrioridad</td>
-                    <!-- Añade más celdas según los atributos de tu clase Ticket -->
+                    <th>Id Ticket</th>
+                    <th>Id Cliente</th>
+                    <th>Id Tecnico</th>
+                    <th>Descripción</th>
+                    <th>Codigo de estado</th>
+                    <th>Prioridad</th>
                 </tr>
-            }
-        </table>
-    </div>
-    <div class="center-button">
-        <button onclick="volver()">Volver</button>
+                @foreach (var ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.IdTicket</td>
+                        <td>@ticket.IdCliente</td>
+                        <td>@ticket.IdTecnico</td>
+                        <td>@ticket.Descripcion</td>
+                        <td>@ticket.EstadoTecnico</td>
+                        <td>@ticket.IdPrioridad</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="center-button">
+            <button onclick="volver()">Volver</button>
+        </div>
     </div>
 </div>
-
-
 
 <script>
     function volver() {
         window.location.href = "/Administrador/Index";
     }
 </script>
+
+
