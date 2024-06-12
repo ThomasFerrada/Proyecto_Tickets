@@ -19,6 +19,7 @@ namespace Proyecto_Tickets.Controllers
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
             ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
+            //
 
             if (id != 0 && tipoUsr == 3)
             {
