@@ -1,0 +1,45 @@
+﻿body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url(../../img/smooth-green-concrete-wall-background.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Bahnschrift", sans-serif;
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    color:#fff;
+}
+
+h3 {
+    margin-top: 10px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: lightgreen;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: 'Bahnschrift', sans-serif;
+    width: calc(100% - 20px);
+}

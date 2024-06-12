@@ -11,17 +11,17 @@
     <h3>Ticket N° @TempData["ticket"]</h3>
     <textarea>@TempData["bitacora"]</textarea>
     <form asp-action="MarcarLeido" method="post">
-        <input type="type" name="notificacion" value="@TempData["notificacion"]" />
-        <input type="type" name="vistaOrigen" value="Index" />
+        <input type="hidden" name="notificacion" value="@TempData["notificacion"]" />
+        <input type="hidden" name="vistaOrigen" value="Index" />
         <button type="submit" class="leido">Marcar como leido</button>
     </form>
 
 </div>
 <div class="principal">
-        <h1>Panel de Control de Tickets</h1>
+        <h1>Mis Tickets de ayuda</h1>
         <table>
             <tr>
-                <th>Ticket</th>
+                <th>Id Ticket</th>
                 <th>Problema</th>
                 <th>Estado</th>
                 <th>Tecnico</th>
@@ -38,10 +38,7 @@
                 </tr>
             }
         </table>
-        <div class="center-button">
-            <!-- Div para centrar el botón -->
-            <button onclick="redirigir()">Cerrar Sesión</button> <!-- Agregar botón "Salir" con función de redirección -->
-        </div>
+       
 
 </div>
 
@@ -70,3 +67,14 @@
         }
     </script>
 
+<div class="center-button">
+    <button onclick="abrirCrearConsulta()">Crear consulta tecnica</button>
+</div>
+
+<script>
+    function abrirCrearConsulta() {
+        window.location.href = "/Ticket/Index";
+    }
+</script>
+
+<!--FIN-->

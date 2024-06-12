@@ -6,9 +6,7 @@
     
 }
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+
 <link rel="stylesheet" href="~/css/Ticket/Index.css" asp-append-version="true" />
 <div id="fondoOscuro"></div>
 <div class="panelnotif" style="display:none;" data-ticket="@TempData["ticket"]" data-bitacora="@TempData["bitacora"]">
@@ -40,7 +38,7 @@
             </div>
             <div class="fila">
                 <div class="textoformulario">
-                    <h3>Ingrese descripción del problema</h3>
+                    <h3>Describa su problema :</h3>
                 </div>
                 <textarea id="descripcion" type="text" name="descripcion" placeholder="Descripción (máx. 255 carácteres)"></textarea>
             </div>
@@ -49,6 +47,9 @@
                 <button id="botoncrear" type="submit">Crear</button>
             </div>
         }
+    </div>
+    <div class="button-container">
+        <button id="botoncerrar" onclick="cerrarVentana()">Volver</button>
     </div>
 </div>
 
@@ -94,6 +95,9 @@
         const panelprincipal = $('.principal');
         panelNotif.css('display', 'none');
         $('#fondoOscuro').css('display', 'none');
+    }
+    function cerrarVentana() {
+        window.location.href = "/Ticket/misTickets";
     }
     </script>
 

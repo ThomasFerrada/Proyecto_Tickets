@@ -191,7 +191,8 @@ namespace Proyecto_Tickets.Controllers
                 peticion.EstadoTicket = ticket.EstadoTecnico;
                 peticion.Mensaje = motivo;
                 var response = _tickets.InsPeticion(peticion);
-                return View();
+
+                return RedirectToAction("Index", "TicketTecnico");
             }
             else
             {

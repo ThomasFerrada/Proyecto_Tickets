@@ -10,7 +10,7 @@
 
 <div class="principal">
     <div class="label1">
-        <h2>Tickets disponibles</h2>
+        <h2>Solicitudes</h2>
     </div>
     <div class="formulario">
         <table class="tabla">
@@ -44,7 +44,7 @@
                     }
 
                     <td>
-                        <form asp-action="Examinar" method="post" target="_blank">
+                        <form asp-action="Examinar" method="post">
                             <input type="hidden" name="idTicketExaminar" value="@peticion.IdTicket" />
                             <button class="btnimg" type="submit">
                                 <img class="imgbtn" src="/img/lupa.png" style="width:20px;height:20px" />
@@ -57,5 +57,30 @@
             }
         </table>
     </div>
+    <div class="center-button">
+        <button onclick="abrirCrearUsuario()">Crear Usuario</button>
+        <button onclick="abrirListaTickets()">Ver Tickets</button>
+        <button onclick="abrirListaUsuarios()">Ver Usuarios</button>
+
+    </div>
 </div>
+
+
+
+<script>
+    function abrirCrearUsuario() {
+        window.open("/Administrador/CrearUsuario", "_blank");
+    }
+
+    function abrirListaTickets() {
+        // Redirigir al usuario a otra página
+        window.location.href = "/Administrador/ListaTickets"; //
+    }
+
+    function abrirListaUsuarios() {
+        // Redirigir al usuario a otra página
+        window.location.href = "/Administrador/ListaUsuarios"; //
+    }
+</script>
+@* FINAL *@
 
