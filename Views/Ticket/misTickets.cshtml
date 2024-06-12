@@ -11,8 +11,8 @@
     <h3>Ticket N° @TempData["ticket"]</h3>
     <textarea>@TempData["bitacora"]</textarea>
     <form asp-action="MarcarLeido" method="post">
-        <input type="type" name="notificacion" value="@TempData["notificacion"]" />
-        <input type="type" name="vistaOrigen" value="Index" />
+        <input type="hidden" name="notificacion" value="@TempData["notificacion"]" />
+        <input type="hidden" name="vistaOrigen" value="Index" />
         <button type="submit" class="leido">Marcar como leido</button>
     </form>
 
