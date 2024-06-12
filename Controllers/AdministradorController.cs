@@ -133,5 +133,35 @@ namespace Proyecto_Tickets.Controllers
             listausuarios=_ticket.AllUsuarios();
             return View(listausuarios);
         }
+
+
+            [HttpPost]
+        [Route("Ticket/ListaUsuarios")]
+        public IActionResult DeleteUser(int id)
+            {
+                var cliente = _ticket.GetClienteById(id);
+                if (cliente != null)
+                {
+                    _ticket.DeleteCliente(id);
+                    return RedirectToAction("ListaUsuarios", "Administrador"); // O a donde sea que quieras redirigir
+                }
+
+                var tecnico = _ticket.GetTecnicoById(id);
+                if (tecnico != null)
+                {
+                    _ticket.DeleteTecnico(id);
+                    return RedirectToAction("ListaUsuarios", "Administrador");
+                }
+
+                var administrador = _ticket.GetAdministradorById(id);
+                if (administrador != null)
+                {
+                    _ticket.DeleteAdministrador(id);
+                    return RedirectToAction("ListaUsuarios", "Administrador");
+                }
+
+                return NotFound();
+            }
+
     }
 }

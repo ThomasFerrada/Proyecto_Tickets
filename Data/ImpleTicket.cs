@@ -587,5 +587,122 @@ namespace Proyecto_Tickets.Data
 
             return allTickets;
         }
+
+        public Cliente GetClienteById(int id)
+        {
+            Cliente cliente = null;
+            string query = "SELECT idCliente, nombre, correo, contrasena FROM Cliente WHERE idCliente = @id";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        cliente = new Cliente
+                        {
+                            IdCliente = reader.GetInt32(reader.GetOrdinal("idCliente")),
+                            Nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            Correo = reader.GetString(reader.GetOrdinal("correo")),
+                            Contraseña = reader.GetString(reader.GetOrdinal("contrasena"))
+                        };
+                    }
+                }
+            }
+
+            return cliente;
+        }
+
+        public void DeleteCliente(int id)
+        {
+            string query = "DELETE FROM Cliente WHERE idCliente = @id";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public Tecnico GetTecnicoById(int id)
+        {
+            Tecnico tecnico = null;
+            string query = "SELECT idTecnico, nombre, correo, contrasena FROM Tecnico WHERE idTecnico = @id";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        tecnico = new Tecnico
+                        {
+                            IdTecnico = reader.GetInt32(reader.GetOrdinal("idTecnico")),
+                            Nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            Correo = reader.GetString(reader.GetOrdinal("correo")),
+                            Contraseña = reader.GetString(reader.GetOrdinal("contrasena"))
+                        };
+                    }
+                }
+            }
+
+            return tecnico;
+        }
+
+        public void DeleteTecnico(int id)
+        {
+            string query = "DELETE FROM Tecnico WHERE idTecnico = @id";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public Administrador GetAdministradorById(int id)
+        {
+            Administrador administrador = null;
+            string query = "SELECT idAdmin, nombre, correo, contrasena FROM Administrador WHERE idAdmin = @id";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        administrador = new Administrador
+                        {
+                            IdAdmin = reader.GetInt32(reader.GetOrdinal("idAdmin")),
+                            Nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            Correo = reader.GetString(reader.GetOrdinal("correo")),
+                            Contraseña = reader.GetString(reader.GetOrdinal("contrasena"))
+                        };
+                    }
+                }
+            }
+
+            return administrador;
+        }
+
+        public void DeleteAdministrador(int id)
+        {
+            string query = "DELETE FROM Administrador WHERE idAdmin = @id";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
