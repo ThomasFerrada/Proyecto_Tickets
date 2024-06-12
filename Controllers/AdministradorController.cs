@@ -84,7 +84,7 @@ namespace Proyecto_Tickets.Controllers
 
 
 
-                return View();
+                return RedirectToAction("Index", "Administrador");
             }
             else
             {
