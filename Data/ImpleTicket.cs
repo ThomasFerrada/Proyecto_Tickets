@@ -483,5 +483,23 @@ namespace Proyecto_Tickets.Data
                 return response2.ToString();
             }
         }
+
+        public List<Ticket> AllTickets()
+        {
+            List<Ticket> tickets = new List<Ticket>();
+
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+
+                string sql = "SELECT * FROM Ticket";
+
+                tickets = conexion.Query<Ticket>(sql, parametros).ToList();
+
+                
+            }
+
+            return tickets;
+        }
     }
 }

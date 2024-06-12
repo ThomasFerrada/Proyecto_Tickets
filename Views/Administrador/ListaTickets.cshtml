@@ -1,0 +1,50 @@
+﻿@using Proyecto_Tickets.Data
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutGeneral";
+
+}
+@model IEnumerable<Proyecto_Tickets.Models.Ticket>;
+<div class="principal">
+    <div class="label1">
+        <h2>Tickets en el sistema</h2>
+    </div>
+    <div class="formulario">
+        <table>
+            <tr>
+                <th>Id Ticket</th>
+                <th>Id Cliente</th>
+                <th>Id Tecnico</th>
+                <th>Descripción</th>
+                <th>Estado Tecnico</th>
+                <th>Prioridad</th>
+                <!-- Añade más columnas según los atributos de tu clase Ticket -->
+            </tr>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.IdTicket</td>
+                    <td>@ticket.IdCliente</td>
+                    <td>@ticket.IdTecnico</td>
+                    <td>@ticket.Descripcion</td>
+                    <td>@ticket.EstadoTecnico</td>
+                    <td>@ticket.IdPrioridad</td>
+                    <!-- Añade más celdas según los atributos de tu clase Ticket -->
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="center-button">
+        <button onclick="volver()">Volver</button>
+    </div>
+</div>
+
+
+
+<script>
+    function volver() {
+        window.location.href = "/Administrador/Index";
+    }
+</script>

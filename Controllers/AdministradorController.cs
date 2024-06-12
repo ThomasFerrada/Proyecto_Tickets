@@ -120,5 +120,10 @@ namespace Proyecto_Tickets.Controllers
             return View();
 
         }
+        public IActionResult ListaTickets() {
+            List<Ticket> listatickets = new List<Ticket>();
+            listatickets = _ticket.AllTickets();
+            return View(listatickets);
+        }
     }
 }
