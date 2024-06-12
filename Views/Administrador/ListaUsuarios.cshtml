@@ -1,0 +1,57 @@
+@using Proyecto_Tickets.Data
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutGeneral";
+}
+@model IEnumerable<Proyecto_Tickets.Models.Usuario>;
+
+<link rel="stylesheet" href="~/css/Administrador/ListaUsuarios.css" asp-append-version="true" />
+
+<div class="principal">
+    <div class="label1">
+        <h2>Tickets en el sistema</h2>
+    </div>
+    <div class="formulario">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Contraseña</th>
+                <th>Eliminar Usuario</th>
+                <!-- Añade más columnas según los atributos de tu clase Ticket -->
+            </tr>
+            @foreach (var usuario in Model)
+            {
+                <tr>
+                    <td>@usuario.Id</td>
+                    <td>@usuario.nombre</td>
+                    <td>@usuario.Correo</td>
+                    <td>@usuario.contraseña</td>
+                    <td>
+                        <form asp-action="DeleteUser" method="post">
+                            <input type="hidden" name="id" value="@usuario.Id" />
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <!-- Añade más columnas según los atributos de tu clase Ticket -->
+            }
+        </table>
+    </div>
+    <div class="center-button">
+        <button onclick="volver()">Volver</button>
+    </div>
+    
+</div>
+
+
+
+<script>
+    function volver() {
+        window.location.href = "/Administrador/Index";
+    }
+</script>
+

@@ -136,23 +136,33 @@ namespace Proyecto_Tickets.Controllers
                 Ticket ticket1 = new Ticket();
                 Notificaciones notificaciones = new Notificaciones();
                 ticket1 = _tickets.ObtenerTicket(ticket);
-                var response = _tickets.UpdateTicket(id,estadoAnterior, NuevoEstado, comentario, ticket);
-                if (response == "1")
+                if (NuevoEstado == 4)
                 {
                     notificaciones.IdTicket = ticket;
                     notificaciones.IdCliente = ticket1.IdCliente;
                     notificaciones.IdTecnico = ticket1.IdTecnico;
-                    if (mensaje==null && NuevoEstado==2)
-                    {
-                        mensaje = "Su ticket N° "+ticket+" esta siendo atendido";
-                    }
-                    else if (NuevoEstado == 4)
-                    {
-                        mensaje = "Su Ticket N° "+ticket+" ha sido finalizado, comentario del tecnico: " + mensaje;
-                    }
+                    mensaje = "Su Ticket N° " + ticket + " ha sido finalizado, comentario del tecnico: " + mensaje;
                     notificaciones.Bitacora = mensaje;
                     notificaciones.Visto = false;
+
                     var response2 = _tickets.UpdateNotificacion(notificaciones);
+                }
+                var response = _tickets.UpdateTicket(id,estadoAnterior, NuevoEstado, comentario, ticket);
+                if (response == "1")
+                {
+                    
+                    if (mensaje==null && NuevoEstado==2)
+                    {
+                        notificaciones.IdTicket = ticket;
+                        notificaciones.IdCliente = ticket1.IdCliente;
+                        notificaciones.IdTecnico = ticket1.IdTecnico;
+                        mensaje = "Su ticket N° "+ticket+" esta siendo atendido";
+                        notificaciones.Bitacora = mensaje;
+                        notificaciones.Visto = false;
+                        var response2 = _tickets.UpdateNotificacion(notificaciones);
+                    }
+                    
+                    
                     return RedirectToAction("Index", "TicketTecnico");
                 }
                 else
