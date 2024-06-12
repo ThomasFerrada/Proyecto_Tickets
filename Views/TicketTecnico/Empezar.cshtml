@@ -17,12 +17,12 @@
     @if (Model.IdPrioridad>4)
     {
        <div>
-           <button id="solitud"> Solicitud de cambio</button>
+           <button id="solitud"> Solicitud de traspaso</button>
         </div>
     }
 
     <div id="motivo" style="display:none">
-        <h3>Motivo de la solicitud</h3>
+        <h3>Motivo de la solicitud :</h3>
             <form asp-action="Peticion" method="post" target="_blank">
                 <input type="hidden" name="idTicket" value="@Model.IdTicket" />
                 <textarea name="motivo"></textarea>
@@ -110,4 +110,17 @@
         });
 
         
+</script>
+<div class="center-button">
+        <!-- Div para centrar el botón -->
+        <button onclick="volveraTicketsTecnico()">Volver</button> <!-- Agregar botón "Salir" con función de redirección -->
+    </div>
+</div>
+
+<!-- Script para la función de redirección -->
+<script>
+    function volveraTicketsTecnico() {
+        // Redirigir al usuario a otra página
+        window.location.href = "/TicketTecnico/Index"; //
+    }
 </script>

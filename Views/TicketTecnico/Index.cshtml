@@ -51,7 +51,7 @@
             <td>
                 @if (ticket.Bloqueado == "S")
                 {
-                    <form asp-action="Empezar" method="post" target="_blank">
+                    <form asp-action="Empezar" method="post">
                         <input type="hidden" name="idTicketEmpezar" value="@ticket.IdTicket" />
                         <button class="btnimg"  type="submit" disabled>
                             <img  src="~/img/boton-de-play.png" alt="Examinar" style="width: 15px; height: 15px; opacity: 0.7;" />
@@ -60,7 +60,7 @@
                 }
                 else
                 {
-                    <form asp-action="Empezar" method="post" target="_blank">
+                    <form asp-action="Empezar" method="post">
                         <input type="hidden" name="idTicketEmpezar" value="@ticket.IdTicket" />
                         <button class="btnimg" type="submit">
                             <img class="imgbtn" src="~/img/boton-de-play.png" alt="Examinar" />
