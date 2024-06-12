@@ -144,6 +144,7 @@ namespace Proyecto_Tickets.Controllers
                     mensaje = "Su Ticket N° " + ticket + " ha sido finalizado, comentario del tecnico: " + mensaje;
                     notificaciones.Bitacora = mensaje;
                     notificaciones.Visto = false;
+
                     var response2 = _tickets.UpdateNotificacion(notificaciones);
                 }
                 var response = _tickets.UpdateTicket(id,estadoAnterior, NuevoEstado, comentario, ticket);
