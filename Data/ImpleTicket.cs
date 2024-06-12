@@ -1,6 +1,9 @@
 ﻿using Dapper;
 using Proyecto_Tickets.Models;
 using System.Net.Sockets;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.SqlClient;
 
 namespace Proyecto_Tickets.Data
 {
@@ -482,6 +485,107 @@ namespace Proyecto_Tickets.Data
                 var response2 = conexion.Execute(query, parametros);
                 return response2.ToString();
             }
+        }
+
+        public List<Ticket> AllTickets()
+        {
+            List<Ticket> tickets = new List<Ticket>();
+            using (var conexion = _conexion.ObtenerConexion())
+            {
+                var parametros = new DynamicParameters();
+                string sql = "SELECT * FROM Ticket";
+                tickets = conexion.Query<Ticket>(sql, parametros).ToList();
+            }
+            return tickets;
+        }
+
+        public List<Usuario> AllClientes()
+        {
+            var usuario = new List<Usuario>();
+            string query = "SELECT idCliente, nombre, correo, contrasena FROM Cliente";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        usuario.Add(new Usuario
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("idCliente")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            Correo = reader.GetString(reader.GetOrdinal("correo")),
+                            contraseña = reader.GetString(reader.GetOrdinal("contrasena"))
+                        });
+                    }
+                }
+            }
+
+            return usuario;
+        }
+
+        public List<Usuario> AllTecnicos()
+        {
+            var usuario = new List<Usuario>();
+            string query = "SELECT idTecnico, nombre, correo, contrasena FROM Tecnico";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        usuario.Add(new Usuario
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("idTecnico")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            Correo = reader.GetString(reader.GetOrdinal("correo")),
+                            contraseña = reader.GetString(reader.GetOrdinal("contrasena"))
+                        });
+                    }
+                }
+            }
+
+            return usuario;
+        }
+
+        public List<Usuario> AllAdministradores()
+        {
+            var usuario = new List<Usuario>();
+            string query = "SELECT idAdmin, nombre, correo, contrasena FROM Administrador";
+
+            using (var connection = _conexion.ObtenerConexion())
+            using (var command = new SqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        usuario.Add(new Usuario
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("idAdmin")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            Correo = reader.GetString(reader.GetOrdinal("correo")),
+                            contraseña = reader.GetString(reader.GetOrdinal("contrasena"))
+                        });
+                    }
+                }
+            }
+
+            return usuario;
+        }
+
+        public List<Usuario> AllUsuarios()
+        {
+            var allTickets = new List<Usuario>();
+
+            allTickets.AddRange(AllClientes());
+            allTickets.AddRange(AllTecnicos());
+            allTickets.AddRange(AllAdministradores());
+
+            return allTickets;
         }
     }
 }

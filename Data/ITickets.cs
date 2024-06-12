@@ -8,6 +8,11 @@ namespace Proyecto_Tickets.Data
         Notificaciones Notifificacion(int id);
         Peticion ObtenerPeticion(int id);
         List<Ticket> ObtenerTickets(int id);
+        List<Ticket> AllTickets();
+        List<Usuario> AllClientes();
+        List<Usuario> AllAdministradores();
+        List<Usuario> AllTecnicos();
+        List<Usuario> AllUsuarios();
         List<Ticket> ObtenerTicketsTecnico(int id);
         List<Notificaciones> ObtenerNotificaciones(int id);
         string InsertTicket(Ticket ticket);
