@@ -18,10 +18,10 @@
 
 </div>
 <div class="principal">
-        <h1>Benja Lloron</h1>
+        <h1>Mis Tickets de ayuda</h1>
         <table>
             <tr>
-                <th>Ticket</th>
+                <th>Id Ticket</th>
                 <th>Problema</th>
                 <th>Estado</th>
                 <th>Tecnico</th>
@@ -38,10 +38,7 @@
                 </tr>
             }
         </table>
-        <div class="center-button">
-            <!-- Div para centrar el botón -->
-            <button onclick="redirigir()">Cerrar Sesión</button> <!-- Agregar botón "Salir" con función de redirección -->
-        </div>
+       
 
 </div>
 
@@ -70,3 +67,13 @@
         }
     </script>
 
+<div class="center-button">
+    <button onclick="redirigirCrearConsulta()">Crear consulta tecnica</button>
+
+</div>
+
+<script>
+    function redirigirCrearConsulta() {
+        window.location.href = "/Ticket/Index";
+    }
+</script>
