@@ -13,6 +13,12 @@ namespace Proyecto_Tickets.Data
         List<Usuario> AllAdministradores();
         List<Usuario> AllTecnicos();
         List<Usuario> AllUsuarios();
+        Cliente GetClienteById(int id);
+        void DeleteCliente(int id);
+        Tecnico GetTecnicoById(int id);
+        void DeleteTecnico(int id);
+        Administrador GetAdministradorById(int id);
+        void DeleteAdministrador(int id);
         List<Ticket> ObtenerTicketsTecnico(int id);
         List<Notificaciones> ObtenerNotificaciones(int id);
         string InsertTicket(Ticket ticket);
