@@ -19,6 +19,7 @@ namespace Proyecto_Tickets.Controllers
             var id = HttpContext.Session.GetInt32("UserId") ?? 0;
             var tipoUsr = HttpContext.Session.GetInt32("TipoUsuario");
             ViewBag.NombreUsuario = HttpContext.Session.GetString("Nombre");
+            //
 
             if (id != 0 && tipoUsr == 3)
             {
@@ -120,5 +121,47 @@ namespace Proyecto_Tickets.Controllers
             return View();
 
         }
+        public IActionResult ListaTickets() {
+            List<Ticket> listatickets = new List<Ticket>();
+            listatickets = _ticket.AllTickets();
+            return View(listatickets);
+        }
+
+        public IActionResult ListaUsuarios()
+        {
+            List<Usuario> listausuarios = new List<Usuario>();
+            listausuarios=_ticket.AllUsuarios();
+            return View(listausuarios);
+        }
+
+
+            [HttpPost]
+        [Route("Ticket/ListaUsuarios")]
+        public IActionResult DeleteUser(int id)
+            {
+                var cliente = _ticket.GetClienteById(id);
+                if (cliente != null)
+                {
+                    _ticket.DeleteCliente(id);
+                    return RedirectToAction("ListaUsuarios", "Administrador"); // O a donde sea que quieras redirigir
+                }
+
+                var tecnico = _ticket.GetTecnicoById(id);
+                if (tecnico != null)
+                {
+                    _ticket.DeleteTecnico(id);
+                    return RedirectToAction("ListaUsuarios", "Administrador");
+                }
+
+                var administrador = _ticket.GetAdministradorById(id);
+                if (administrador != null)
+                {
+                    _ticket.DeleteAdministrador(id);
+                    return RedirectToAction("ListaUsuarios", "Administrador");
+                }
+
+                return NotFound();
+            }
+
     }
 }

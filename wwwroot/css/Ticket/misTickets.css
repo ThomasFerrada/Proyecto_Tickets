@@ -7,8 +7,7 @@
 }
 principal {
     width: 100%;
-    background-color: aquamarine;
-    background-image: url(../../img/smooth-green-concrete-wall-background.jpg);
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
