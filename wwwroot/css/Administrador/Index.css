@@ -73,3 +73,21 @@
 .btnimg:hover {
     transform: scale(1.1);
 }
+.center-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .center-button button {
+        background-color: #4CAF50; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px; /* Bordes redondeados */
+        cursor: pointer;
+        font-family: 'Bahnschrift', sans-serif; /* Asegura que la fuente sea consistente */
+    }
+
+        .center-button button:hover {
+            background-color: #45a049; /* Color de fondo al pasar el ratón por encima */
+        }
